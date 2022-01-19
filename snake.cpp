@@ -27,4 +27,5 @@ int main(int argc, char *argv[])
     SDL_DestroyWindow(fenetre);
     SDL_Quit();  //on quitte la SDL
     return 0;
+    //test
 }
