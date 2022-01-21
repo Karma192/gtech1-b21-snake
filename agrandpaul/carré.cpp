@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     fenetre = SDL_CreateWindow("SNAKE",
         SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED, 540, 540, SDL_WINDOW_RESIZABLE);  // Création de la fenêtre
+        SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_RESIZABLE);  // Création de la fenêtre
 
     if (fenetre == NULL)  //gestion des erreurs
     {
@@ -32,28 +32,25 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    SDL_Surface* image = SDL_LoadBMP("img/snk.bmp");
-    if(!image)
-    {
-        printf("Erreur de chargement de l'image : %s",SDL_GetError());
-        return -1;
-    }
-    SDL_Texture* monImage = SDL_CreateTextureFromSurface(renderer,image);  //La texture monImage contient maintenant l'image importée
-    if(!monImage)
-    {
-        printf("Erreur de chargement de l'image : %s",SDL_GetError());
-        return -1;
-    }
+    int SDL_SetRenderTarget(SDL_Renderer* renderer, SDL_Texture*  texture);
+
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET,200,200);
+    SDL_SetRenderDrawColor(renderer,255,0,0,255);
+    SDL_SetRenderTarget(renderer, texture); //on modifie la texture
+    SDL_RenderDrawRect(renderer,NULL);
+    SDL_RenderFillRect(renderer, NULL);
+    SDL_SetRenderTarget(renderer, NULL);// Dorénavent, on modifie à nouveau le renderer
+
     SDL_Rect position;
-    position.x = 0;
-    position.y = 0;
-    SDL_QueryTexture(monImage, NULL, NULL, &position.w, &position.h);
-    SDL_RenderCopy(renderer, monImage, NULL, &position);
+    position.x = 100;
+    position.y = 200;
+    SDL_QueryTexture(texture, NULL, NULL, &position.w, &position.h);
+    SDL_RenderCopy(renderer, texture, NULL, &position);
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(10000);  //pause de 10 secondes
+    SDL_Delay(5000);  //pause de 5 secondes
 
-    SDL_FreeSurface(image); //Équivalent du destroyTexture pour les surface, permet de libérer la mémoire quand on n'a plus besoin d'une surface
+    SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer); 
     SDL_DestroyWindow(fenetre);
     SDL_Quit();  //on quitte la SDL
