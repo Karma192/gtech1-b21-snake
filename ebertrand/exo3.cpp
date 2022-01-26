@@ -47,10 +47,12 @@ int main(int argc, char *argv[]){
 
   if (keystate[SDL_SCANCODE_UP]){
       cout << "UP" << endl;
+      rect.y+=100;
     }
     
   if (keystate[SDL_SCANCODE_DOWN]){
       cout << "DOWN" << endl;
+      rect.x+=100;
   }
 
   SDL_Delay(4000);
