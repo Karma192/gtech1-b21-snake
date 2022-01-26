@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include "snake.hpp"
+#define widthWindow 540
+#define size 30
+#define sizeOfSquare = floor(widthWindow /size)
 
 using namespace std;
 
@@ -9,7 +13,8 @@ SDL_Window* fenetre;  // Déclaration de la fenêtre
 SDL_Renderer* renderer; //Déclaration du renderer
 SDL_Surface* mapSnake = SDL_LoadBMP("../img/snk.bmp");
 
-int width = 540;
+
+
  
 int map(void)
 {
@@ -21,7 +26,7 @@ int map(void)
 
     fenetre = SDL_CreateWindow("SNAKE",
         SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED, width, width, Uint32(0));  // Création de la fenêtre
+        SDL_WINDOWPOS_CENTERED, widthWindow, widthWindow, Uint32(0));  // Création de la fenêtre
 
     if (fenetre == NULL)  //gestion des erreurs
     {
@@ -68,9 +73,29 @@ int destroyMap()
     return 0;
 }
 
-int drawGrid(int width)
+int drawGrid(int w)
 {
+    int x =0;
+    int y =0;
+    SDL_SetRenderDrawColor(renderer, 80, 80, 80, 255);
+    for (int n; n<size; n++) // n takes values from 0 to GRID_SIZE 
+    {
+        x += sizeOfSquare;
+        y += sizeOfSquare;
 
+        SDL_RenderDrawLine(renderer, 0, y, widthWindow, y);
+        SDL_RenderDrawLine(renderer, x, 0, x, widthWindow);
+    }
+    SDL_RenderPresent(renderer);
+    int SDL_RenderClear(renderer);
+    return 0;
+}
+
+int snakeHead()
+{
+    Head *snkHead = new Head();
+    snkHead.posx = sizeOfSquare*10;
+    snkHead.posy =sizeOfSquare*10;
     return 0;
 }
 
@@ -78,6 +103,7 @@ int main(void)
 {
     int exit = 0;
     map();
+    drawGrid(widthWindow);
 
     while (exit == 0)
     {
@@ -85,8 +111,8 @@ int main(void)
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 exit =1;
-      }
-    }
+            }
+        }
     }
     destroyMap();
 }

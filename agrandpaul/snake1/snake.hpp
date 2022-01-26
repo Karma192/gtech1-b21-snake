@@ -3,8 +3,17 @@
 #include <stdlib.h>
 #include <iostream>
 
-using namespace std
-
 class Head {
-    
+    public :
+    int posx = NULL;
+    int posy = NULL;
+    int dir = NULL;
+
+    private :
+
+};
+
+int Move(int dir)
+{
+
 }
