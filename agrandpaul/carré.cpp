@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     fenetre = SDL_CreateWindow("SNAKE",
         SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_RESIZABLE);  // Création de la fenêtre
+        SDL_WINDOWPOS_CENTERED, 800, 800, (Uint32)0);  // Création de la fenêtre
 
     if (fenetre == NULL)  //gestion des erreurs
     {
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     int SDL_SetRenderTarget(SDL_Renderer* renderer, SDL_Texture*  texture);
 
     SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET,200,200);
-    SDL_SetRenderDrawColor(renderer,255,0,0,255);
+    SDL_SetRenderDrawColor(renderer,250,150,250,255);
     SDL_SetRenderTarget(renderer, texture); //on modifie la texture
     SDL_RenderDrawRect(renderer,NULL);
     SDL_RenderFillRect(renderer, NULL);

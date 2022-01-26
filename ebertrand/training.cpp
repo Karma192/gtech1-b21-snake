@@ -57,12 +57,13 @@ int main(int argc, char *argv[])
     }
 
     snake = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC); // Création du renderer
-
     if(snake == NULL)//gestion des erreurs
     {
         printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
         return EXIT_FAILURE;
     }
+
+  
 
     int SDL_SetRenderTarget(SDL_Renderer* snake, SDL_Texture*  texture);
 
