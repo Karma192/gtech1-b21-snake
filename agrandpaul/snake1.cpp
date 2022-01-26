@@ -3,7 +3,7 @@
 #include <stdlib.h>
 Uint32 frame_rate = 6.9;
  
-int main(int argc, char *argv[])
+int main(void)
 {
     SDL_Window* fenetre;  // Déclaration de la fenêtre
     SDL_Renderer* renderer; //Déclaration du renderer

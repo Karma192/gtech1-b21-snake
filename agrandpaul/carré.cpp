@@ -1,7 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-Uint32 frame_rate = 6.9;
  
 int main(int argc, char *argv[])
 {
