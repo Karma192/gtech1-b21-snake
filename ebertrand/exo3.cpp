@@ -48,25 +48,29 @@ int keys(void){
   const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
   if (keystate[SDL_SCANCODE_UP]) {
-    printf("%d\n", posity);
-    cout << "UP" << endl;
-    posity-=10;
-    printf("%d\n", posity);
+    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
+      cout << "UP" << endl;
+      posity-=10;
+
+    }
   }
     
   if (keystate[SDL_SCANCODE_DOWN]) {
     cout << "DOWN" << endl;
     posity+=10;
+    cout << SDL_GetKeyboardState << endl;
   }
 
   if (keystate[SDL_SCANCODE_RIGHT]) { 
     cout << "RIGHT" << endl;
     positx+=10;
+
   }
 
   if (keystate[SDL_SCANCODE_LEFT]) { 
     cout << "LEFT" << endl;
     positx-=10;
+
   }
 
   return 0;
