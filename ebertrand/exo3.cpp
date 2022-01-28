@@ -89,6 +89,7 @@ int main(void){
   map();
   while (exit == 0){
     keys();
+    SDL_Delay(20);
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_QUIT) {
