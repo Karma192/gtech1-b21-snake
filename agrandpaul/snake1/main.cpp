@@ -65,7 +65,7 @@ int map(void)
     return 0;
 }
 
-int destroyMap(void)
+int destroy(void)
 {
     SDL_FreeSurface(mapSnake); //Équivalent du destroyTexture pour les surface, permet de libérer la mémoire quand on n'a plus besoin d'une surface
     SDL_DestroyRenderer(renderer); 
@@ -104,73 +104,51 @@ int drawGrid(void)
     return 0;
 }
 
-void move(int posx, int posy)
+int keys()
 {
-    int dirx = 0;
-    int diry = 0;
-
-    SDL_Rect rect;
-    rect.w = SIZEOFSQUARE;
-    rect.h = SIZEOFSQUARE;
-    rect.x = posx +dirx;
-    rect.y = posy +diry;
-
-    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-    SDL_RenderDrawRect(renderer, &rect);
-    SDL_RenderFillRect(renderer, &rect); 
-    SDL_RenderPresent(renderer);
-
     const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
-    if (keystate[SDL_SCANCODE_UP]) {
-        cout << "UP" << endl;
-        diry =SIZEOFSQUARE;
-        dirx =0;
-    }
-        
-    if (keystate[SDL_SCANCODE_DOWN]) {
-        cout << "DOWN" << endl;
-        diry =SIZEOFSQUARE;
-        dirx =0;
+  if (keystate[SDL_SCANCODE_UP]) {
+      cout << "UP" << endl;
+      return 1;
+  }
+    
+  if (keystate[SDL_SCANCODE_DOWN]) {
+    cout << "DOWN" << endl;
+    return
+  }
 
-    }
+  if (keystate[SDL_SCANCODE_RIGHT]) { 
+    cout << "RIGHT" << endl;
+    positx+=10;
 
-    if (keystate[SDL_SCANCODE_RIGHT]) { 
-        cout << "RIGHT" << endl;
-        dirx =SIZEOFSQUARE;
-        diry =0;
+  }
 
-    }
+  if (keystate[SDL_SCANCODE_LEFT]) { 
+    cout << "LEFT" << endl;
+    positx-=10;
 
-    if (keystate[SDL_SCANCODE_LEFT]) { 
-        cout << "LEFT" << endl;
-        dirx =SIZEOFSQUARE;
-        diry =0;
-
-    }
+  }
 }
 
 /*int snakeHead()
 {
     Head *snkHead = new Head();
-    snkHead.posx = sizeOfSquare*10;
-    snkHead.posy =sizeOfSquare*10;
+    snkHead.posx = sizeOfSquare*15;
+    snkHead.posy =sizeOfSquare*15;
     return 0;
 }*/
 
 int main(void)
 {
     int exit = 0;
-    int positx = 15*SIZEOFSQUARE;
-    int posity = 15*SIZEOFSQUARE;
     map();
-    drawGrid();
+    //drawGrid();
 
     while (exit == 0)
     {
-        move(positx, posity);
-        //SDL_Delay(20);
+        move(positx, posity, dirx, diry);
         exit = redCross();
     }
-    destroyMap();
+    destroy();
 }
