@@ -40,6 +40,12 @@ int keys(void){
   rect.x = positx;
   rect.y = posity;
 
+  SDL_Event event;
+  SDL_PollEvent( &event );
+
+
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
   SDL_RenderDrawRect(renderer, &rect);
   SDL_RenderFillRect(renderer, &rect); 
@@ -48,29 +54,40 @@ int keys(void){
   const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
   if (keystate[SDL_SCANCODE_UP]) {
-    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
+    while (keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
+      SDL_Delay(50);
       cout << "UP" << endl;
       posity-=10;
-
+      keys();
+      
     }
   }
     
   if (keystate[SDL_SCANCODE_DOWN]) {
-    cout << "DOWN" << endl;
-    posity+=10;
-    cout << SDL_GetKeyboardState << endl;
+    while (keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
+      SDL_Delay(50);
+      cout << "DOWN" << endl;
+      posity+=10;
+      keys();
+    }
   }
 
-  if (keystate[SDL_SCANCODE_RIGHT]) { 
-    cout << "RIGHT" << endl;
-    positx+=10;
-
+  if (keystate[SDL_SCANCODE_RIGHT]) {
+    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_UP]==0){
+      SDL_Delay(50);     
+      cout << "RIGHT" << endl;
+      positx+=10;
+      keys();
+    }
   }
 
   if (keystate[SDL_SCANCODE_LEFT]) { 
-    cout << "LEFT" << endl;
-    positx-=10;
-
+    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_UP]==0 && keystate[SDL_SCANCODE_RIGHT]==0){
+      SDL_Delay(50);
+      cout << "LEFT" << endl;
+      positx-=10;
+      keys();
+    }
   }
 
   return 0;
