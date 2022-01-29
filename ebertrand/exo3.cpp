@@ -34,6 +34,7 @@ int map(void){
 }
 
 int keys(void){
+  int i = 0;
   SDL_Rect rect;
   rect.w = 30;
   rect.h = 30;
@@ -47,11 +48,21 @@ int keys(void){
 
   const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
-  if (keystate[SDL_SCANCODE_UP]) {
-    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
-      cout << "UP" << endl;
-      posity-=10;
+  int scanup, scandown, scanleft, scanright;
 
+  scanup=keystate[SDL_SCANCODE_UP];
+  scandown=keystate[SDL_SCANCODE_DOWN];
+  scanleft=keystate[SDL_SCANCODE_LEFT];
+  scanright=keystate[SDL_SCANCODE_RIGHT];
+
+  if (keystate[SDL_SCANCODE_UP]) {
+    while (scanright==0 || scandown==0 || scanleft==0){
+      SDL_GetKeyboardState(NULL);
+      printf("%d\n", scandown);
+      cout << "UP" << endl;
+      SDL_Delay(500);
+      posity-=10;
+      SDL_Delay(500);
     }
   }
     
