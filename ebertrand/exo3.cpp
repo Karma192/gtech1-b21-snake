@@ -34,13 +34,20 @@ int map(void){
 }
 
 int keys(void){
-  int i = 0;
+  int i;
+
   SDL_Rect rect;
   rect.w = 30;
   rect.h = 30;
   rect.x = positx;
   rect.y = posity;
 
+  SDL_Event event;
+  SDL_PollEvent(&event);
+
+
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
   SDL_RenderDrawRect(renderer, &rect);
   SDL_RenderFillRect(renderer, &rect); 
@@ -48,42 +55,45 @@ int keys(void){
 
   const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
-  int scanup, scandown, scanleft, scanright;
-
-  scanup=keystate[SDL_SCANCODE_UP];
-  scandown=keystate[SDL_SCANCODE_DOWN];
-  scanleft=keystate[SDL_SCANCODE_LEFT];
-  scanright=keystate[SDL_SCANCODE_RIGHT];
-
   if (keystate[SDL_SCANCODE_UP]) {
-    while (scanright==0 || scandown==0 || scanleft==0){
-      SDL_GetKeyboardState(NULL);
-      printf("%d\n", scandown);
+    while (keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
+      SDL_Delay(50);
       cout << "UP" << endl;
-      SDL_Delay(500);
       posity-=10;
-      SDL_Delay(500);
+      keys();
+      i=1;
     }
   }
     
-  if (keystate[SDL_SCANCODE_DOWN]) {
-    cout << "DOWN" << endl;
-    posity+=10;
-    cout << SDL_GetKeyboardState << endl;
+  if (keystate[SDL_SCANCODE_DOWN] && i!=1) {
+    while (keystate[SDL_SCANCODE_LEFT]==0 || keystate[SDL_SCANCODE_RIGHT]==0){
+      SDL_Delay(50);
+      cout << "DOWN" << endl;
+      posity+=10;
+      keys();
+      printf("%d\n", i);
+    }
   }
 
-  if (keystate[SDL_SCANCODE_RIGHT]) { 
-    cout << "RIGHT" << endl;
-    positx+=10;
-
+  if (keystate[SDL_SCANCODE_RIGHT]) {
+    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_UP]==0){
+      SDL_Delay(50);     
+      cout << "RIGHT" << endl;
+      positx+=10;
+      keys();
+    }
   }
 
   if (keystate[SDL_SCANCODE_LEFT]) { 
-    cout << "LEFT" << endl;
-    positx-=10;
-
+    while (keystate[SDL_SCANCODE_DOWN]==0 || keystate[SDL_SCANCODE_UP]==0 || keystate[SDL_SCANCODE_RIGHT]==1){
+      SDL_Delay(50);
+      cout << "LEFT" << endl;
+      positx-=10;
+      keys();
+    }
   }
 
+  printf("%d\n", i);
   return 0;
 
 }
