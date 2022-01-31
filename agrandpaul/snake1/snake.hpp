@@ -3,8 +3,39 @@
 #include <stdlib.h>
 #include <iostream>
 
-using namespace std
-
 class Head {
-    
+    public :
+    int posx = NULL;
+    int posy = NULL;
+    int dir = NULL;
+
+    private :
+
+};
+
+int Move(int dir)
+{
+    if(dir == 1)
+    {
+        posy += SIZEOFSQUARE;
+        posx = posx;
+    }
+
+    if (dir == 2)
+    {
+        posx += SIZEOFSQUARE;
+        posy = posy;
+    }
+
+    if (dir == 3)
+    {
+        posx -= SIZEOFSQUARE;
+        posy = posy;
+    }
+
+    if (dir == 4)
+    {
+        posx -= SIZEOFSQUARE;
+        posy = posy
+    }
 }
