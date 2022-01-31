@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
+#include "snake.hpp"
 
 #define WIDTHGAME 540
 #define SIZE 30
 #define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
+Uint32 frame_rate = 7;
 
 
 using namespace std;
@@ -104,50 +106,24 @@ int drawGrid(void)
     return 0;
 }
 
-int keys()
+int initSnake()
 {
-    const Uint8 *keystate = SDL_GetKeyboardState(NULL);
+    Snake snakeH;
 
-  if (keystate[SDL_SCANCODE_UP]) {
-      cout << "UP" << endl;
-      return 1;
-  }
-    
-  if (keystate[SDL_SCANCODE_DOWN]) {
-    cout << "DOWN" << endl;
-    return
-  }
-
-  if (keystate[SDL_SCANCODE_RIGHT]) { 
-    cout << "RIGHT" << endl;
-    positx+=10;
-
-  }
-
-  if (keystate[SDL_SCANCODE_LEFT]) { 
-    cout << "LEFT" << endl;
-    positx-=10;
-
-  }
+    snakeH.posx = 15*SIZEOFSQUARE;
+    snakeH.posy = 15*SIZEOFSQUARE;
+    snakeH.dir = 0;
 }
-
-/*int snakeHead()
-{
-    Head *snkHead = new Head();
-    snkHead.posx = sizeOfSquare*15;
-    snkHead.posy =sizeOfSquare*15;
-    return 0;
-}*/
 
 int main(void)
 {
     int exit = 0;
     map();
-    //drawGrid();
+    initSnake();
 
     while (exit == 0)
     {
-        move(positx, posity, dirx, diry);
+        snakeH.Move(snakeH.keys());
         exit = redCross();
     }
     destroy();
