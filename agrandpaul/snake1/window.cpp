@@ -5,7 +5,7 @@ SDL_Window* fenetre;
 SDL_Renderer* renderer;
 SDL_Surface* mapSnake = SDL_LoadBMP("../img/snk.bmp");
 
-int map(void)
+int windows(void)
 {
     if(SDL_Init(SDL_INIT_VIDEO) < 0)  // initialisation de la SDL
     {
@@ -31,6 +31,16 @@ int map(void)
         return EXIT_FAILURE;
     }
 
+    SDL_Rect position;
+    position.x = 0;
+    position.y = 0;
+    SDL_RenderPresent(renderer);
+
+    return 0;
+}
+
+int map(void)
+{
     if(!mapSnake)
     {
         printf("Erreur de chargement de l'image : %s",SDL_GetError());
@@ -42,12 +52,8 @@ int map(void)
         printf("Erreur de chargement de l'image : %s",SDL_GetError());
         return -1;
     }
-    SDL_Rect position;
-    position.x = 0;
-    position.y = 0;
     SDL_QueryTexture(monImage, NULL, NULL, &position.w, &position.h);
     SDL_RenderCopy(renderer, monImage, NULL, &position);
-    SDL_RenderPresent(renderer);
 
     return 0;
 }

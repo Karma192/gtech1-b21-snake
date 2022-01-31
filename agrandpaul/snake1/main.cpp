@@ -39,6 +39,7 @@ void drawHead(Snake *snakeH)
 int main(void)
 {
     int exit = 0;
+    windows();
     Snake *snakeH = initSnake();
 
     while (exit == 0)
