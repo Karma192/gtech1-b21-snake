@@ -65,10 +65,10 @@ int destroy(void)
 int redCross(void)
 {
     SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                return 1;
-            }
-            else {return 0;}
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            return 1;
         }
+    }
+    return 0;
 }

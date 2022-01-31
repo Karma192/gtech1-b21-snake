@@ -12,22 +12,23 @@ Uint32 frame_rate = 7;
 
 using namespace std;
 
-void initSnake()
+Snake *initSnake()
 {
-    Snake snakeH;
+    Snake *snakeH = new Snake();
 
-    snakeH.posx = 15*SIZEOFSQUARE;
-    snakeH.posy = 15*SIZEOFSQUARE;
-    snakeH.dir = 0;
+    snakeH->posx = 15*SIZEOFSQUARE;
+    snakeH->posy = 15*SIZEOFSQUARE;
+    snakeH->prev_dir = 0;
+    return snakeH;
 }
 
-void drawHead()
+void drawHead(Snake *snakeH)
 {
     SDL_Rect head;
     head.w = SIZEOFSQUARE;
     head.h = SIZEOFSQUARE;
-    head.x = snakeH.posx;
-    head.y = snakeH.posy;
+    head.x = snakeH->posx;
+    head.y = snakeH->posy;
 
     SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
     SDL_RenderDrawRect(renderer, &head);
@@ -38,15 +39,16 @@ void drawHead()
 int main(void)
 {
     int exit = 0;
-    map();
-    initSnake();
+    Snake *snakeH = initSnake();
 
     while (exit == 0)
     {
-        drawHead();
-        snakeH.Move(snakeH.keys());
+        map();
+        drawHead(snakeH);
+        snakeH->Move(snakeH->keys());
         SDL_RenderClear(renderer);
         exit = redCross();
     }
     destroy();
+    return 0;
 }

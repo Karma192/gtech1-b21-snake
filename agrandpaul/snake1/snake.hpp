@@ -5,62 +5,76 @@
 #define SIZE 30
 #define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
-class Snake {
+#define UP 1
+#define DOWN -1
+#define RIGHT 2
+#define LEFT -2
+
+class Snake { // -> class Application
 
 public :
     int posx = 0;
     int posy = 0;
-    int dir = 0;
+    int prev_dir = 0;
 
     int keys()
     {
+        int tmpdir = this->prev_dir;
         const Uint8 *keystate = SDL_GetKeyboardState(NULL);
         SDL_Event event;
         SDL_PollEvent(&event);
 
         if (keystate[SDL_SCANCODE_UP]) {
-            dir = 1;
+            tmpdir = UP;
         }
         
         if (keystate[SDL_SCANCODE_DOWN]) {
-            dir = 2;
+            tmpdir = DOWN;
         }
 
         if (keystate[SDL_SCANCODE_RIGHT]) { 
-            dir = 3;
+            tmpdir = RIGHT;
         }
 
         if (keystate[SDL_SCANCODE_LEFT]) { 
-            dir = 4;
+            tmpdir = LEFT;
+        }
+        
+        if (tmpdir == - this->prev_dir)
+        {
+            return this->prev_dir;
+        }
+        else{
+            this->prev_dir = tmpdir;
+            return this->prev_dir;
         }
 
-        return dir;
     }
 
     void Move(int dir)
     {
         
-        if(dir == 1)
+        if(dir == UP)
         {
             posy = posy +SIZEOFSQUARE;
             posx = posx;
         }
 
-        if (dir == 2)
+        if (dir == DOWN)
         {
             posy = posy -SIZEOFSQUARE;
             posx = posx;
         }
 
-        if (dir == 3)
+        if (dir == LEFT)
         {
             posx = posx -SIZEOFSQUARE;
             posy = posy;
         }
 
-        if (dir == 4)
+        if (dir == RIGHT)
         {
-            posx = posx -SIZEOFSQUARE;
+            posx = posx +SIZEOFSQUARE;
             posy = posy;
         }
     }
