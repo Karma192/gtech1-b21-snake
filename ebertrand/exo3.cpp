@@ -50,7 +50,7 @@ int keys(void){
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
-  SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+  SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
   SDL_RenderDrawRect(renderer, &rect);
   SDL_RenderFillRect(renderer, &rect); 
   SDL_RenderPresent(renderer);

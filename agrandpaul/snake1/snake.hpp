@@ -19,22 +19,22 @@ int keys()
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    if (keystate[SDL_SCANCODE_UP]) {
+    if (keystate[SDL_SCANCODE_UP] && dir!=2) {
         cout << "UP" << endl;
         dir = 1;
     }
     
-    if (keystate[SDL_SCANCODE_DOWN]) {
+    if (keystate[SDL_SCANCODE_DOWN] && dir!=1) {
         cout << "DOWN" << endl;
         dir = 2;
     }
 
-    if (keystate[SDL_SCANCODE_RIGHT]) { 
+    if (keystate[SDL_SCANCODE_RIGHT] && dir!=4) { 
         cout << "RIGHT" << endl;
         dir = 3;
     }
 
-    if (keystate[SDL_SCANCODE_LEFT]) { 
+    if (keystate[SDL_SCANCODE_LEFT] && dir!=3) { 
         cout << "LEFT" << endl;
         dir = 4;
     }
