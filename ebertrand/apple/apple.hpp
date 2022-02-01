@@ -18,8 +18,8 @@ class Apple{
             SDL_Renderer *renderer;
 
             srand((unsigned) time(NULL));
-            int randomx = 0 + (rand() % 31);
-            int randomy = 0 + (rand() % 31);
+            int randomx = 0 + (rand() % SIZE+1);
+            int randomy = 0 + (rand() % SIZE+1);
             posy = randomy * SIZEOFSQUARE;
             posx = randomx * SIZEOFSQUARE;
             
@@ -33,6 +33,5 @@ class Apple{
             SDL_RenderDrawRect(renderer, &rect);
             SDL_RenderFillRect(renderer, &rect); 
             SDL_RenderPresent(renderer);
-
         }
 };
