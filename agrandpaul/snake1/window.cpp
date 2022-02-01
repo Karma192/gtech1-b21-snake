@@ -1,5 +1,10 @@
-#pragma once
 #include <SDL2/SDL.h>
+#include <iostream>
+
+#define WIDTHGAME 540
+#define HEIGHTWINDOW 600
+#define SIZE 30
+#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
 SDL_Window* fenetre;
 SDL_Renderer* renderer;
@@ -7,7 +12,7 @@ SDL_Surface* mapSnake = SDL_LoadBMP("../img/snk.bmp");
 
 int windows(void)
 {
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)  // initialisation de la SDL
+    if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
        printf("Erreur d'initialisation de la SDL : %s", SDL_GetError());
        return EXIT_FAILURE;
@@ -15,17 +20,17 @@ int windows(void)
 
     fenetre = SDL_CreateWindow("SNAKE",
         SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED, WIDTHGAME, WIDTHGAME, Uint32(0));  // Création de la fenêtre
+        SDL_WINDOWPOS_CENTERED, WIDTHGAME, HEIGHTWINDOW, Uint32(0));
 
-    if (fenetre == NULL)  //gestion des erreurs
+    if (fenetre == NULL)
     {
         printf("Erreur lors de la creation d'une fenetre : %s", SDL_GetError());
         return EXIT_FAILURE;
     }
 
-    renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC); // Création du renderer
+    renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    if(renderer == NULL)//gestion des erreurs
+    if(renderer == NULL)
     {
         printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
         return EXIT_FAILURE;
@@ -46,24 +51,28 @@ int map(void)
         printf("Erreur de chargement de l'image : %s",SDL_GetError());
         return -1;
     }
-    SDL_Texture* monImage = SDL_CreateTextureFromSurface(renderer,mapSnake);  //La texture monImage contient maintenant l'image importée
+    
+    SDL_Texture* monImage = SDL_CreateTextureFromSurface(renderer,mapSnake); 
+    
     if(!monImage)
     {
         printf("Erreur de chargement de l'image : %s",SDL_GetError());
         return -1;
     }
+    
     SDL_QueryTexture(monImage, NULL, NULL, &position.w, &position.h);
     SDL_RenderCopy(renderer, monImage, NULL, &position);
+    SDL_RenderPresent(renderer);
 
     return 0;
 }
 
 int destroy(void)
 {
-    SDL_FreeSurface(mapSnake); //Équivalent du destroyTexture pour les surface, permet de libérer la mémoire quand on n'a plus besoin d'une surface
+    SDL_FreeSurface(mapSnake); 
     SDL_DestroyRenderer(renderer); 
     SDL_DestroyWindow(fenetre);
-    SDL_Quit();  //on quitte la SDL
+    SDL_Quit(); 
 
     return 0;
 }
