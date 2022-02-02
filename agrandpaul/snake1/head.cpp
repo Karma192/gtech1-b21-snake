@@ -1,5 +1,7 @@
-#pragma once
+#include <iostream>
 #include <SDL2/SDL.h>
+
+#include "snake.hpp"
 
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 600
@@ -81,11 +83,11 @@ int Snake::colBoard(void)
     else {return 0;}
 }
 
-int Snake::colTail(void)
+/*int Snake::colTail(void)
 {
     if (posx == ... && posy == ...) {
         return 1;
     }
 
     else {return 0;}
-}
+}*/

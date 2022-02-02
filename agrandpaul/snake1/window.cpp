@@ -36,9 +36,8 @@ int windows(void)
         return EXIT_FAILURE;
     }
 
-    SDL_Rect position;
-    position.x = 0;
-    position.y = 0;
+    // 1. Couleur
+    // 2. SDL_RenderClear();
     SDL_RenderPresent(renderer);
 
     return 0;
@@ -46,6 +45,10 @@ int windows(void)
 
 int map(void)
 {
+    SDL_Rect position;
+    position.x = 0;
+    position.y = 0;
+
     if(!mapSnake)
     {
         printf("Erreur de chargement de l'image : %s",SDL_GetError());

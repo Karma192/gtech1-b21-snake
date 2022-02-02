@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "snake.hpp"
-#include "window.cpp"
+//#include "snake.hpp"
+//#include "window.cpp"
 #include "head.cpp"
 
 #define WIDTHGAME 540
@@ -26,7 +26,7 @@ Snake *initSnake()
     return snakeH;
 }
 
-Snake *initTails()
+/*Snake *initTails()
 {
     Snake *tails... = new Snake();
 
@@ -35,7 +35,7 @@ Snake *initTails()
     tails->prev_dir = prev_dir...;
 
     return tails;
-}
+}*/
 
 void drawHead(Snake *snakeH)
 {
@@ -51,7 +51,7 @@ void drawHead(Snake *snakeH)
     SDL_RenderPresent(renderer);
 }
 
-void drawTails(Snake *tails)
+/*void drawTails(Snake *tails)
 {
     SDL_Rect tail;
     tail.w = SIZEOFSQUARE;
@@ -63,4 +63,4 @@ void drawTails(Snake *tails)
     SDL_RenderDrawRect(renderer, &tail);
     SDL_RenderFillRect(renderer, &tail); 
     SDL_RenderPresent(renderer);
-}
+}*/

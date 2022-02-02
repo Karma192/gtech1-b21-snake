@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "snake.hpp"
+// #include "snake.hpp"
 #include "window.cpp"
 #include "head.cpp"
 #include "drawSnake.cpp"
@@ -26,7 +26,7 @@ int main(void)
     {
         map();
         gameOver = snakeH->colBoard();
-        gameOver = snakeH->colTail();
+        //gameOver = snakeH->colTail();
         drawHead(snakeH);
         snakeH->Move(snakeH->keys());
         SDL_RenderClear(renderer);
@@ -35,7 +35,7 @@ int main(void)
 
     if (gameOver != 0) {
         cout << "Game Over..." << endl;
-        cout << "Your score is " score << endl;
+        cout << "Your score is " << endl;
     }
     destroy();
     return 0;
