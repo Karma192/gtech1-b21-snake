@@ -7,10 +7,6 @@ using namespace std;
 
 #include "apple.hpp"
 
-#define WIDTHGAME 540
-#define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
-
 SDL_Renderer *renderer; //Déclaration renderer
 SDL_Window* fenetre;  // Déclaration de la fenêtre
 
@@ -51,8 +47,15 @@ int map(void){
 }
 
 int main(){
+    int exit = 0;
     map();
-    Apple();
-    SDL_Delay(4000);
-    
+    while (exit == 0){
+        Apple();
+        SDL_Event event;
+            while (SDL_PollEvent(&event)) {
+                if (event.type == SDL_QUIT) {
+                    exit =1;
+                }
+            } 
+    }
 }
