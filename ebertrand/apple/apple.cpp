@@ -35,7 +35,7 @@ int map(void){
 
 int main(){
     map();
-    Apple();
+    Apple(posx);
     printf("%d\n%d\n", posy, posx);
     SDL_Delay(3000);
 }

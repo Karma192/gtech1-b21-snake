@@ -1,14 +1,13 @@
+#pragma once
 #include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 
 class Snake {
-    public :
-    int posx = NULL;
-    int posy = NULL;
-    int dir = NULL;
+public :
+    int posx = 0;
+    int posy = 0;
+    int prev_dir = 0;
 
+<<<<<<< HEAD
     private :
 
 };
@@ -69,3 +68,6 @@ int Move(int dir)
         posy = posy
     }
 }
+=======
+};
+>>>>>>> ecfb4cbfefa04e3f24271a2ab029f02d0c475ca1
