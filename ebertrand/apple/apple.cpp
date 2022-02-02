@@ -2,9 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-
-#include "apple.hpp"
+#include <time.h>
 using namespace std;
+
+#define WIDTHGAME 540
+#define SIZE 30
+#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
+int posy;
+int posx;
 
 SDL_Renderer *renderer; //Déclaration renderer
 SDL_Window* fenetre;  // Déclaration de la fenêtre
@@ -31,11 +36,26 @@ int map(void){
     printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
     return EXIT_FAILURE;
   }
+
+    srand((unsigned) time(NULL));
+    int randomx = 0 + (rand() % SIZE+1);
+    int randomy = 0 + (rand() % SIZE+1);
+    posy = randomy * SIZEOFSQUARE;
+    posx = randomx * SIZEOFSQUARE;
+    
+    SDL_Rect rect;
+    rect.x = posx;
+    rect.y = posy;
+    rect.w = SIZEOFSQUARE;
+    rect.h = SIZEOFSQUARE;
+
+    SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect); 
+    SDL_RenderPresent(renderer);
 }
 
 int main(){
     map();
-    Apple(posx);
-    printf("%d\n%d\n", posy, posx);
-    SDL_Delay(3000);
+    SDL_Delay(4000);
 }
