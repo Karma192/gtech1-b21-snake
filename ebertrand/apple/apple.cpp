@@ -32,7 +32,9 @@ int map(void){
     printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
     return EXIT_FAILURE;
   }
-    
+}
+
+int apple(void){
     Apple A = Apple();
     SDL_Rect rect;
     rect.x = A.posx;
@@ -49,6 +51,7 @@ int map(void){
 int main(){
     int exit = 0;
     map();
+    apple();
     while (exit == 0){
         Apple();
         SDL_Event event;

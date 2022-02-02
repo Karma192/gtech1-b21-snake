@@ -128,9 +128,9 @@ int destroyMap(){
 int main(void){
   int exit = 0;
   map();
+  apple();
   while (exit == 0){
     keys();
-    apple();
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_QUIT) {
