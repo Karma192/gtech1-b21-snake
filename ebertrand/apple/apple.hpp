@@ -20,18 +20,7 @@ class Apple{
             srand((unsigned) time(NULL));
             int randomx = 0 + (rand() % SIZE+1);
             int randomy = 0 + (rand() % SIZE+1);
-            posy = randomy * SIZEOFSQUARE;
-            posx = randomx * SIZEOFSQUARE;
-            
-            SDL_Rect rect;
-            rect.x = this->posx;
-            rect.y = this->posy;
-            rect.w = SIZEOFSQUARE;
-            rect.h = SIZEOFSQUARE;
-
-            SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
-            SDL_RenderDrawRect(renderer, &rect);
-            SDL_RenderFillRect(renderer, &rect); 
-            SDL_RenderPresent(renderer);
+            this->posy = randomy * SIZEOFSQUARE;
+            this->posx = randomx * SIZEOFSQUARE;
         }
 };
