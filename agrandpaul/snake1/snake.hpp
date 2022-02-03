@@ -1,9 +1,8 @@
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
+#include <SDL2/SDL.h>
 
 class Snake {
+<<<<<<< HEAD
     public :
     int posx = NULL;
     int posy = NULL;
@@ -69,3 +68,16 @@ int Move(int dir)
         posy = posy
     }
 }
+=======
+public :
+    int keys(void);
+    void Move(int dir);
+    int colBoard(void);
+    Snake *initSnake(void);
+
+private :
+    int posx = 0;
+    int posy = 0;
+    int prev_dir = 0;
+};
+>>>>>>> 5822617ad870b71d573ccfb2c2dd89a9c508dffb
