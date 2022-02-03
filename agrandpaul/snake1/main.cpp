@@ -1,10 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-// #include "snake.hpp"
-#include "window.cpp"
-#include "head.cpp"
-#include "drawSnake.cpp"
+#include "snake.hpp"
 
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 600
@@ -20,15 +17,15 @@ int main(void)
     int gameOver = 0;
     int score = 0;
     windows();
-    Snake *snakeH = initSnake();
+    Snake *snakeHead = snakeHead->initSnake();
 
     while (exit == 0 || gameOver == 0)
     {
         map();
-        gameOver = snakeH->colBoard();
+        gameOver = snakeHead->colBoard();
         //gameOver = snakeH->colTail();
-        drawHead(snakeH);
-        snakeH->Move(snakeH->keys());
+        snakeHead->drawHead(snakeHead);
+        snakeHead->Move(snakeHead->keys());
         SDL_RenderClear(renderer);
         exit = redCross();
     }
