@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include "apple/apple.hpp"
 int positx = 285;
 int posity = 285;
 
@@ -33,6 +34,20 @@ int map(void){
     printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
     return EXIT_FAILURE;
   }
+}
+
+int apple(void){
+    Apple A = Apple();
+    SDL_Rect rect;
+    rect.x = A.posx;
+    rect.y = A.posy;
+    rect.w = SIZEOFSQUARE;
+    rect.h = SIZEOFSQUARE;
+
+    SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect); 
+    SDL_RenderPresent(renderer);
 }
 
 int keys(void){
@@ -113,6 +128,7 @@ int destroyMap(){
 int main(void){
   int exit = 0;
   map();
+  apple();
   while (exit == 0){
     keys();
     SDL_Event event;
