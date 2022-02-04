@@ -130,11 +130,12 @@ int main(){
       exit(EXIT_FAILURE);
   }
 
+DrawApple(sdlwin.GetRenderer());
+
   int exit = 0;
   while (exit == 0){
     DrawSnake(sdlwin.GetRenderer());
     keys();
-    DrawApple(sdlwin.GetRenderer());
     Move(keys());
     SDL_Delay(100);
     SDL_Event event;
