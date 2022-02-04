@@ -16,24 +16,25 @@ int main(void)
     int exit = 0;
     int gameOver = 0;
     int score = 0;
-    windows();
+    Window *window = window->Window();
     Snake *snakeHead = snakeHead->initSnake();
 
     while (exit == 0 || gameOver == 0)
     {
-        map();
+        window->map();
         gameOver = snakeHead->colBoard();
         //gameOver = snakeH->colTail();
         snakeHead->drawHead(snakeHead);
         snakeHead->Move(snakeHead->keys());
-        SDL_RenderClear(renderer);
-        exit = redCross();
+        SDL_RenderClear(Window->renderer);
+        exit = window->redCross();
     }
 
     if (gameOver != 0) {
         cout << "Game Over..." << endl;
         cout << "Your score is " << endl;
+        cout << score << endl;
     }
-    destroy();
+    ~Window();
     return 0;
 }
