@@ -4,8 +4,8 @@
 #include <iostream>
 using namespace std;
 
-#include "apple.cpp"
-#include "MainSDLWindow.cpp"
+#include "apple.hpp"
+#include "MainSDLWindow.hpp"
 
 
 #define WIDTHGAME 540
@@ -22,21 +22,36 @@ int posx = 15*SIZEOFSQUARE;
 int posy = 15*SIZEOFSQUARE;
 int prev_dir = 0;
 
-int DrawSnake(){
-    SDL_Renderer *snake;
+int DrawSnake(SDL_Renderer *renderer){
     SDL_Rect head;
     head.w = SIZEOFSQUARE;
     head.h = SIZEOFSQUARE;
     head.x = posx;
     head.y = posy;
 
-    SDL_SetRenderDrawColor(snake, 0, 0, 0, 255);
-    SDL_RenderClear(snake);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(snake, 1, 50, 32, 255);
-    SDL_RenderDrawRect(snake, &head);
-    SDL_RenderFillRect(snake, &head); 
-    SDL_RenderPresent(snake);
+    SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
+    SDL_RenderDrawRect(renderer, &head);
+    SDL_RenderFillRect(renderer, &head); 
+    SDL_RenderPresent(renderer);
+}
+
+int DrawApple(SDL_Renderer *renderer)
+{
+    ; //Déclaration renderer
+    Apple A = Apple();
+    SDL_Rect rect;
+    rect.x = A.posx;
+    rect.y = A.posy;
+    rect.w = SIZEOFSQUARE;
+    rect.h = SIZEOFSQUARE;
+
+    SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderPresent(renderer);
 }
 
 int keys(void)
@@ -110,18 +125,22 @@ int colBoard(void)
 }
 
 int main(){
+  MainSDLWindow sdlwin;
+  if (sdlwin.Init("Snake", 800, 600) == EXIT_FAILURE) {
+      exit(EXIT_FAILURE);
+  }
+
   int exit = 0;
-  MainSDLWindow::Init();
   while (exit == 0){
-    DrawSnake();
+    DrawSnake(sdlwin.GetRenderer());
     keys();
-    DrawApple();
+    DrawApple(sdlwin.GetRenderer());
     Move(keys());
     SDL_Delay(100);
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_QUIT) {
-        exit =1;
+        exit = 1;
       }
     } 
   }
