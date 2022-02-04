@@ -8,7 +8,7 @@ using namespace std;
 
 Snake::Snake()
 {
-    int posx = 15 * SIZEOFSQUARE;
-    int posy = 15 * SIZEOFSQUARE;
-    int prev_dir = 0;
+    posx = 15 * SIZEOFSQUARE;
+    posy = 15 * SIZEOFSQUARE;
+    this->prev_dir = 0;
 }

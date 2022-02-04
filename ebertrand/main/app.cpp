@@ -5,10 +5,11 @@
 using namespace std;
 
 #include "apple.hpp"
-#include "MainSDLWindow.hpp"
 #include "snake.hpp"
+#include "MainSDLWindow.hpp"
 
 #define HEIGHTWINDOW 600
+
 
 #define UP 1
 #define DOWN -1
@@ -19,14 +20,17 @@ Uint32 frame_rate = 16;
 Uint32 frame_time_start = SDL_GetTicks();
 Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
 
+int posx = 15 * SIZEOFSQUARE;
+int posy = 15 * SIZEOFSQUARE;
+int prev_dir = 0;
+
 int DrawSnake(SDL_Renderer *renderer)
 {
-    Snake *S = new Snake();
     SDL_Rect head;
     head.w = SIZEOFSQUARE;
     head.h = SIZEOFSQUARE;
-    head.x = S->posx;
-    head.y = S->posy;
+    head.x = posx;
+    head.y = posy;
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
@@ -39,16 +43,16 @@ int DrawSnake(SDL_Renderer *renderer)
 
 int DrawApple(SDL_Renderer *renderer)
 {
-    Apple *A = new Apple();
-    SDL_Rect apple;
-    apple.w = SIZEOFSQUARE;
-    apple.h = SIZEOFSQUARE;
-    apple.x = A->posx;
-    apple.y = A->posy;
+    Apple* A = new Apple();
+    SDL_Rect rect;
+    rect.x = A->posx;
+    rect.y = A->posy;
+    rect.w = SIZEOFSQUARE;
+    rect.h = SIZEOFSQUARE;
 
     SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
-    SDL_RenderDrawRect(renderer, &apple);
-    SDL_RenderFillRect(renderer, &apple);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);
     SDL_RenderPresent(renderer);
 }
 
@@ -130,15 +134,17 @@ int colBoard(void)
     }
 }
 
-int colApple(Apple *A)
+int colApple(Apple* A)
 {
     if (posx == A->posx && posy == A->posy)
     {
-        cout << "yeeeeees" << endl;
+        cout << "yes"<< endl;
         return 1;
     }
     else
     {
+        printf("duuuuuuuh");
+        cout << A->posx << endl;
         return 0;
     }
 }
@@ -153,6 +159,7 @@ int main()
     int exit = 0;
     while (exit == 0)
     {
+    Apple colApple(Apple* A());
         DrawSnake(sdlwin.GetRenderer());
         keys();
         DrawApple(sdlwin.GetRenderer());
