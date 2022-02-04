@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-#include "window.hpp"
+#include "MainSDLWindow.hpp"
 
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 600
@@ -122,7 +122,7 @@ public :
         return tails;
     }*/
 
-    void drawHead(Snake *snakeHead)
+    void drawHead(Snake *snakeHead, SDL_Renderer *renderer)
     {
         SDL_Rect head;
         head.w = SIZEOFSQUARE;
@@ -130,10 +130,10 @@ public :
         head.x = snakeHead->posx;
         head.y = snakeHead->posy;
 
-        SDL_SetRenderDrawColor(Window->renderer, 1, 50, 32, 255);
-        SDL_RenderDrawRect(Window->renderer, &head);
-        SDL_RenderFillRect(Window->renderer, &head); 
-        SDL_RenderPresent(Window->renderer);
+        SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
+        SDL_RenderDrawRect(renderer, &head);
+        SDL_RenderFillRect(renderer, &head); 
+        SDL_RenderPresent(renderer);
     }
 
     /*void drawTails(Snake *tails)
