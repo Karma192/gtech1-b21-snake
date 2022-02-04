@@ -7,22 +7,23 @@ using namespace std;
 #include "apple.hpp"
 #include "MainSDLWindow.hpp"
 
-
-#define WIDTHGAME 540
 #define HEIGHTWINDOW 600
-#define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
 #define UP 1
 #define DOWN -1
 #define RIGHT 2
 #define LEFT -2
 
-int posx = 15*SIZEOFSQUARE;
-int posy = 15*SIZEOFSQUARE;
+Uint32 frame_rate = 16;
+Uint32 frame_time_start = SDL_GetTicks();
+Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
+
+int posx = 15 * SIZEOFSQUARE;
+int posy = 15 * SIZEOFSQUARE;
 int prev_dir = 0;
 
-int DrawSnake(SDL_Renderer *renderer){
+int DrawSnake(SDL_Renderer *renderer)
+{
     SDL_Rect head;
     head.w = SIZEOFSQUARE;
     head.h = SIZEOFSQUARE;
@@ -34,17 +35,16 @@ int DrawSnake(SDL_Renderer *renderer){
 
     SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
     SDL_RenderDrawRect(renderer, &head);
-    SDL_RenderFillRect(renderer, &head); 
+    SDL_RenderFillRect(renderer, &head);
     SDL_RenderPresent(renderer);
 }
 
 int DrawApple(SDL_Renderer *renderer)
 {
-    ; //Déclaration renderer
-    Apple A = Apple();
+    Apple* A = new Apple();
     SDL_Rect rect;
-    rect.x = A.posx;
-    rect.y = A.posy;
+    rect.x = A->posx;
+    rect.y = A->posy;
     rect.w = SIZEOFSQUARE;
     rect.h = SIZEOFSQUARE;
 
@@ -61,88 +61,112 @@ int keys(void)
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    if (keystate[SDL_SCANCODE_UP]) {
+    if (keystate[SDL_SCANCODE_UP])
+    {
         tmpdir = UP;
     }
-    
-    if (keystate[SDL_SCANCODE_DOWN]) {
+
+    if (keystate[SDL_SCANCODE_DOWN])
+    {
         tmpdir = DOWN;
     }
 
-    if (keystate[SDL_SCANCODE_RIGHT]) { 
+    if (keystate[SDL_SCANCODE_RIGHT])
+    {
         tmpdir = RIGHT;
     }
 
-    if (keystate[SDL_SCANCODE_LEFT]) { 
+    if (keystate[SDL_SCANCODE_LEFT])
+    {
         tmpdir = LEFT;
     }
-    
-    if (tmpdir == - prev_dir)
+
+    if (tmpdir == -prev_dir)
     {
         return prev_dir;
     }
-    else{
+    else
+    {
         prev_dir = tmpdir;
         return prev_dir;
     }
-
 }
 
 void Move(int prev_dir)
 {
-    
-    if(prev_dir == UP)
+
+    if (prev_dir == UP)
     {
-        posy = posy -SIZEOFSQUARE;
+        posy = posy - SIZEOFSQUARE;
         posx = posx;
     }
 
     if (prev_dir == DOWN)
     {
-        posy = posy +SIZEOFSQUARE;
+        posy = posy + SIZEOFSQUARE;
         posx = posx;
     }
 
     if (prev_dir == LEFT)
     {
-        posx = posx -SIZEOFSQUARE;
+        posx = posx - SIZEOFSQUARE;
         posy = posy;
     }
 
     if (prev_dir == RIGHT)
     {
-        posx = posx +SIZEOFSQUARE;
+        posx = posx + SIZEOFSQUARE;
         posy = posy;
     }
 }
 
 int colBoard(void)
 {
-    if (posx >= WIDTHGAME || posy >= WIDTHGAME) {
+    if (posx >= WIDTHGAME || posy >= WIDTHGAME)
+    {
         return 1;
     }
-    else {return 0;}
+    else
+    {
+        return 0;
+    }
 }
 
-int main(){
-  MainSDLWindow sdlwin;
-  if (sdlwin.Init("Snake", 800, 600) == EXIT_FAILURE) {
-      exit(EXIT_FAILURE);
-  }
+int colApple(Apple* A)
+{
+    if (posx == A->posx && posy == A->posy)
+    {
+        cout << "yeeeeees" << endl;
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
-DrawApple(sdlwin.GetRenderer());
-
-  int exit = 0;
-  while (exit == 0){
-    DrawSnake(sdlwin.GetRenderer());
-    keys();
-    Move(keys());
-    SDL_Delay(100);
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT) {
-        exit = 1;
-      }
-    } 
-  }
+int main()
+{
+    MainSDLWindow sdlwin;
+    if (sdlwin.Init("Snake", 540, 600) == EXIT_FAILURE)
+    {
+        exit(EXIT_FAILURE);
+    }
+    int exit = 0;
+    while (exit == 0)
+    {
+        SDL_Delay(100);
+        DrawSnake(sdlwin.GetRenderer());
+        keys();
+        DrawApple(sdlwin.GetRenderer());
+        Move(keys());
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                exit = 1;
+            }
+        }
+    }
 }
