@@ -1,7 +1,8 @@
+#pragma once
 #include <iostream>
 #include <SDL2/SDL.h>
 
-#include "window.cpp"
+#include "window.hpp"
 
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 600
@@ -59,13 +60,13 @@ public :
         
         if(dir == UP)
         {
-            posy = posy +SIZEOFSQUARE;
+            posy = posy -SIZEOFSQUARE;
             posx = posx;
         }
 
         if (dir == DOWN)
         {
-            posy = posy -SIZEOFSQUARE;
+            posy = posy +SIZEOFSQUARE;
             posx = posx;
         }
 
@@ -129,10 +130,10 @@ public :
         head.x = snakeHead->posx;
         head.y = snakeHead->posy;
 
-        SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
-        SDL_RenderDrawRect(renderer, &head);
-        SDL_RenderFillRect(renderer, &head); 
-        SDL_RenderPresent(renderer);
+        SDL_SetRenderDrawColor(Window->renderer, 1, 50, 32, 255);
+        SDL_RenderDrawRect(Window->renderer, &head);
+        SDL_RenderFillRect(Window->renderer, &head); 
+        SDL_RenderPresent(Window->renderer);
     }
 
     /*void drawTails(Snake *tails)
