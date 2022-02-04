@@ -46,3 +46,42 @@ int MainSDLWindow::Init(const char* name, int width, int height) {
   SDL_RenderPresent(this->renderer);
   return EXIT_SUCCESS;
 }
+
+int MainSDLWindow::redCross(void)
+{
+  SDL_Event event;
+  while (SDL_PollEvent(&event)) {
+    if (event.type == SDL_QUIT) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+int MainSDLWindow::map(void)
+{
+  this->mapSnake = SDL_LoadBMP("../img/snk.bmp");
+  
+  SDL_Rect position;
+  position.x = 0;
+  position.y = 0;
+
+  if(!this->mapSnake)
+  {
+    printf("Erreur de chargement de l'image : %s",SDL_GetError());
+    return -1;
+  }
+  
+  SDL_Texture* monImage = SDL_CreateTextureFromSurface(this->renderer, this->mapSnake); 
+  
+  if(!monImage)
+  {
+    printf("Erreur de chargement de l'image : %s",SDL_GetError());
+    return -1;
+  }
+  
+  SDL_QueryTexture(monImage, NULL, NULL, &position.w, &position.h);
+  SDL_RenderCopy(this->renderer, monImage, NULL, &position);
+
+  return 0;
+}
