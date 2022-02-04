@@ -155,7 +155,6 @@ int main()
     int exit = 0;
     while (exit == 0)
     {
-        SDL_Delay(100);
         DrawSnake(sdlwin.GetRenderer());
         keys();
         DrawApple(sdlwin.GetRenderer());
