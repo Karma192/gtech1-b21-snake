@@ -5,7 +5,7 @@
 using namespace std;
 
 #include "apple.cpp"
-#include "window.cpp"
+#include "MainSDLWindow.cpp"
 
 
 #define WIDTHGAME 540
@@ -23,6 +23,7 @@ int posy = 15*SIZEOFSQUARE;
 int prev_dir = 0;
 
 int DrawSnake(){
+    SDL_Renderer *snake;
     SDL_Rect head;
     head.w = SIZEOFSQUARE;
     head.h = SIZEOFSQUARE;
@@ -108,17 +109,9 @@ int colBoard(void)
     else {return 0;}
 }
 
-int destroyMap(){
-    SDL_DestroyRenderer(snake); 
-    SDL_DestroyRenderer(apple); 
-    SDL_DestroyWindow(fenetre);
-    SDL_Quit();  //on quitte la SDL
-    return 0;
-}
-
 int main(){
   int exit = 0;
-  map();
+  MainSDLWindow::Init();
   while (exit == 0){
     DrawSnake();
     keys();
@@ -132,5 +125,4 @@ int main(){
       }
     } 
   }
-  destroyMap();
 }

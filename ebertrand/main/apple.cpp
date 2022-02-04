@@ -8,7 +8,7 @@ using namespace std;
 #include "apple.hpp"
 
 
-int DrawApple(void){
+int DrawApple(){
     SDL_Renderer *apple; //Déclaration renderer
     Apple A = Apple();
     SDL_Rect rect;

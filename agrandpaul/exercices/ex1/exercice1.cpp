@@ -26,6 +26,15 @@ int MainSDLWindow::Init(char*name, int*largeur, int*hauteur){
     int SDL_SetRenderDrawColor(SDL_Renderer* renderer, 0,  0 , 0 , 255);
 }
 
+MainSDLWindow::MainSDLWindow() {
+    this->window = NULL;
+    this->renderer = NULL;
+}
+
+MainSDLWindow::~MainSDLWindow() {
+
+}
+
 int main(void) {
     MainSDLWindow main_window;
     main_window.Init();

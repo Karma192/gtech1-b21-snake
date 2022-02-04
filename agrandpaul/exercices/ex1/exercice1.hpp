@@ -3,15 +3,11 @@
 #include <stdlib.h>
  
 class MainSDLWindow {
-    public :
-    int window = NULL;
-    int renderer = NULL;
-    private :
-    window = SDL_Window*window;
-    renderer = SDL_Renderer*renderer;
-    }
-}
-
-~MainSDLWindow() {
-
+public:
+    MainSDLWindow();
+    ~MainSDLWindow();
+    int Init(char*name, int*largeur, int*hauteur);
+private:
+    SDL_Window *window;
+    SDL_Renderer *renderer;
 }
