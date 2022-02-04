@@ -100,14 +100,6 @@ void Move(int prev_dir)
     }
 }
 
-int colBoard(void)
-{
-    if (posx >= WIDTHGAME || posy >= WIDTHGAME) {
-        return 1;
-    }
-    else {return 0;}
-}
-
 int destroyMap(){
     SDL_DestroyRenderer(snake); 
     SDL_DestroyRenderer(apple); 
