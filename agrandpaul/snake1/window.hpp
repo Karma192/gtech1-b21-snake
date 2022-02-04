@@ -43,17 +43,6 @@ class Window {
             return 0;
         }
 
-        int redCross(void)
-        {
-            SDL_Event event;
-            while (SDL_PollEvent(&event)) {
-                if (event.type == SDL_QUIT) {
-                    return 1;
-                }
-            }
-            return 0;
-        }
-
         Window(void)
         {
             if(SDL_Init(SDL_INIT_VIDEO) < 0)
