@@ -6,7 +6,7 @@
 #define SIZE 30
 #define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
-SDL_Window* fenetre;
+SDL_Window* fenetre1;
 SDL_Renderer* renderer;
 SDL_Surface* mapSnake = SDL_LoadBMP("../img/snk.bmp");
 
@@ -18,17 +18,17 @@ int windows(void)
        return EXIT_FAILURE;
     }
 
-    fenetre = SDL_CreateWindow("SNAKE",
+    fenetre1 = SDL_CreateWindow("SNAKE",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED, WIDTHGAME, HEIGHTWINDOW, Uint32(0));
 
-    if (fenetre == NULL)
+    if (fenetre1 == NULL)
     {
         printf("Erreur lors de la creation d'une fenetre : %s", SDL_GetError());
         return EXIT_FAILURE;
     }
 
-    renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(fenetre1, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     if(renderer == NULL)
     {
@@ -36,8 +36,6 @@ int windows(void)
         return EXIT_FAILURE;
     }
 
-    // 1. Couleur
-    // 2. SDL_RenderClear();
     SDL_RenderPresent(renderer);
 
     return 0;
@@ -74,7 +72,7 @@ int destroy(void)
 {
     SDL_FreeSurface(mapSnake); 
     SDL_DestroyRenderer(renderer); 
-    SDL_DestroyWindow(fenetre);
+    SDL_DestroyWindow(fenetre1);
     SDL_Quit(); 
 
     return 0;
