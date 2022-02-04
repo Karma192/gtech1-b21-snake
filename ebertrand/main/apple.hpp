@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,14 +15,5 @@ class Apple{
     public:
         int posy;
         int posx;
-        Apple(){
-            
-            SDL_Renderer *renderer;
-
-            srand((unsigned) time(NULL));
-            int randomx = zero + (rand() % SIZE+1);
-            int randomy = zero + (rand() % SIZE+1);
-            this->posy = randomy * SIZEOFSQUARE;
-            this->posx = randomx * SIZEOFSQUARE;
-        }
+        Apple();
 };
