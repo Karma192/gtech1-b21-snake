@@ -12,7 +12,7 @@ Apple::Apple()
     srand((unsigned)time(NULL));
     int randomx = zero + (rand() % SIZE + 1);
     int randomy = zero + (rand() % SIZE + 1);
-    this->posy = 10 * SIZEOFSQUARE;
-    this->posx = 10 * SIZEOFSQUARE;
+    this->posy = randomy * SIZEOFSQUARE;
+    this->posx = randomx * SIZEOFSQUARE;
 }
 

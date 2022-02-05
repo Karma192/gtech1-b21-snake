@@ -5,9 +5,11 @@
 using namespace std;
 
 #include "apple.hpp"
+#include "snake.hpp"
 #include "MainSDLWindow.hpp"
 
 #define HEIGHTWINDOW 600
+
 
 #define UP 1
 #define DOWN -1
@@ -136,11 +138,13 @@ int colApple(Apple* A)
 {
     if (posx == A->posx && posy == A->posy)
     {
-        cout << "yeeeeees" << endl;
+        cout << "yes"<< endl;
         return 1;
     }
     else
     {
+        printf("duuuuuuuh");
+        cout << A->posx << endl;
         return 0;
     }
 }
@@ -155,7 +159,7 @@ int main()
     int exit = 0;
     while (exit == 0)
     {
-        SDL_Delay(100);
+    Apple colApple(Apple* A());
         DrawSnake(sdlwin.GetRenderer());
         keys();
         DrawApple(sdlwin.GetRenderer());
