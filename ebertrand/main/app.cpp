@@ -122,15 +122,16 @@ void Move(int prev_dir)
     }
 }
 
-int colBoard(void)
+int colBoard()
 {
-    if (posx >= WIDTHGAME || posy >= WIDTHGAME)
+    if (posx >= WIDTHGAME || posy >= WIDTHGAME || posx < 0 || posy < 0)
     {
-        return 1;
-    }
-    else
-    {
-        return 0;
+        SDL_Renderer *renderer;
+        SDL_Window *fenetre;
+        cout << "GAME OVER" << endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(fenetre);
+        SDL_Quit(); // on quitte la SDL
     }
 }
 
@@ -158,6 +159,7 @@ int main()
     int exit = 0;
     while (exit == 0)
     {
+        colBoard();
         colApple();
         DrawSnake(sdlwin.GetRenderer());
         keys();
