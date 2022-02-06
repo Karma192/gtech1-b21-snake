@@ -13,7 +13,9 @@ using namespace std;
 
 class Apple{
     public:
-        int posy;
-        int posx;
+        int aposy;
+        int aposx;
+        int randomx;
+        int randomy;
         Apple();
 };
