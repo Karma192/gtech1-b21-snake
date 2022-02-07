@@ -10,7 +10,6 @@ using namespace std;
 
 #define HEIGHTWINDOW 600
 
-
 #define UP 1
 #define DOWN -1
 #define RIGHT 2
@@ -22,6 +21,7 @@ Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
 
 int posx = 15 * SIZEOFSQUARE;
 int posy = 15 * SIZEOFSQUARE;
+
 int prev_dir = 0;
 
 int DrawSnake(SDL_Renderer *renderer)
@@ -43,10 +43,10 @@ int DrawSnake(SDL_Renderer *renderer)
 
 int DrawApple(SDL_Renderer *renderer)
 {
-    Apple* A = new Apple();
+    Apple *A = new Apple();
     SDL_Rect rect;
-    rect.x = A->posx;
-    rect.y = A->posy;
+    rect.x = A->aposx;
+    rect.y = A->aposy;
     rect.w = SIZEOFSQUARE;
     rect.h = SIZEOFSQUARE;
 
@@ -122,29 +122,29 @@ void Move(int prev_dir)
     }
 }
 
-int colBoard(void)
+int colBoard()
 {
-    if (posx >= WIDTHGAME || posy >= WIDTHGAME)
+    if (posx >= WIDTHGAME || posy >= WIDTHGAME || posx < 0 || posy < 0)
     {
-        return 1;
-    }
-    else
-    {
-        return 0;
+        SDL_Renderer *renderer;
+        SDL_Window *fenetre;
+        cout << "GAME OVER" << endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(fenetre);
+        SDL_Quit(); // on quitte la SDL
     }
 }
 
-int colApple(Apple* A)
+int colApple()
 {
-    if (posx == A->posx && posy == A->posy)
+    Apple *A = new Apple();
+    if (posx == A->aposx && posy == A->aposy)
     {
-        cout << "yes"<< endl;
         return 1;
     }
     else
     {
-        printf("duuuuuuuh");
-        cout << A->posx << endl;
+        cout << A->aposx << endl;
         return 0;
     }
 }
@@ -159,7 +159,8 @@ int main()
     int exit = 0;
     while (exit == 0)
     {
-    Apple colApple(Apple* A());
+        colBoard();
+        colApple();
         DrawSnake(sdlwin.GetRenderer());
         keys();
         DrawApple(sdlwin.GetRenderer());

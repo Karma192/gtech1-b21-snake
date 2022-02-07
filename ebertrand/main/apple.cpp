@@ -10,9 +10,8 @@ using namespace std;
 Apple::Apple()
 {
     srand((unsigned)time(NULL));
-    int randomx = zero + (rand() % SIZE + 1);
-    int randomy = zero + (rand() % SIZE + 1);
-    this->posy = randomy * SIZEOFSQUARE;
-    this->posx = randomx * SIZEOFSQUARE;
+    randomx = zero + (rand() % SIZE + 1);
+    randomy = zero + (rand() % SIZE + 1);
+    this->aposy = randomy * SIZEOFSQUARE;
+    this->aposx = randomx * SIZEOFSQUARE;
 }
-
