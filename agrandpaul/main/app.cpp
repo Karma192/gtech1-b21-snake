@@ -12,9 +12,8 @@ using namespace std;
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 600
 #define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME / SIZE)
 
-Uint32 frame_rate = 50;
+Uint32 frame_rate = 80;
 
 int main(void)
 {
