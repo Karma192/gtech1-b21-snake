@@ -1,6 +1,4 @@
 #include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
 #include <time.h>
 using namespace std;

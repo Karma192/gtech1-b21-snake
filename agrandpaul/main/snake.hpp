@@ -10,7 +10,7 @@ public :
     void drawHead(SDL_Renderer *renderer);
     Snake(void);
     ~Snake(void);
-    //void draxTails(Snake *tails);
+    //void drawTails(Snake *tails);
     //Snake *initTails(void);
     //int colTail(void);
 
