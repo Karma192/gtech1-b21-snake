@@ -7,12 +7,37 @@ using namespace std;
 
 #include "apple.hpp"
 
-Apple::Apple()
+int Apple::GetPosx(void)
 {
-    srand((unsigned)time(NULL));
-    int randomx = zero + (rand() % SIZE + 1);
-    int randomy = zero + (rand() % SIZE + 1);
-    this->posy = 10 * SIZEOFSQUARE;
-    this->posx = 10 * SIZEOFSQUARE;
+    return this->aposx;
 }
 
+int Apple::GetPosy(void)
+{
+    return this->aposy;
+}
+
+void Apple::DrawApple(SDL_Renderer *renderer)
+{
+    SDL_Rect rect;
+    rect.x = this->aposx;
+    rect.y = this->aposy;
+    rect.w = SIZEOFSQUARE;
+    rect.h = SIZEOFSQUARE;
+
+    SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);
+}
+
+void Apple::colSnake(int ver)
+{
+    if (ver == 1)
+    {
+        srand((unsigned)time(NULL));
+        randomx = zero + (rand() % SIZE + 1);
+        randomy = zero + (rand() % SIZE + 1);
+        this->aposy = randomy * SIZEOFSQUARE;
+        this->aposx = randomx * SIZEOFSQUARE;
+    }
+}
