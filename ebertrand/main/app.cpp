@@ -133,15 +133,25 @@ int colBoard()
     }
 }
 
-int colApple(SDL_Renderer *renderer)
+int colApple()
 {
-    int i = 0;
+    SDL_Rect rect;
+    SDL_Renderer *renderer;
     if (posx == A->aposx && posy == A->aposy)
     {
+
         cout << "yes" << endl;
-        A.~Apple();
-        Apple *A = new Apple();
-        return 1;
+        cout << "0" << endl;
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        cout << "1" << endl;
+        SDL_RenderClear(renderer);
+        cout << "2" << endl;
+        SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
+        cout << "3" << endl;
+        SDL_RenderDrawRect(renderer, &rect);
+        cout << "4" << endl;
+        SDL_RenderFillRect(renderer, &rect);
+        cout << "5" << endl;
     }
     else
     {
@@ -167,10 +177,10 @@ int main()
         else
         {
             Uint32 frame_time_start = SDL_GetTicks();
+            colApple();
             DrawSnake(sdlwin.GetRenderer());
             keys();
             DrawApple(sdlwin.GetRenderer());
-            colApple(sdlwin.GetRenderer());
             Move(keys());
             SDL_RenderPresent(sdlwin.GetRenderer());
             Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
