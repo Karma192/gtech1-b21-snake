@@ -18,4 +18,21 @@ private :
     int posx = 0;
     int posy = 0;
     int prev_dir = 0;
+    Snake *next;
 };
+
+
+int list[][][][] = {}
+
+
+list[5] 
+
+ sizeof(list)
+for (int i =listnbv ; i < 0; i--)
+{
+    listx [i] = list [i-1];
+}
+
+
+segment = 5; 
+listx [segment]
