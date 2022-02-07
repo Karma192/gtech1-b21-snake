@@ -133,11 +133,14 @@ int colBoard()
     }
 }
 
-int colApple()
+int colApple(SDL_Renderer *renderer)
 {
+    int i = 0;
     if (posx == A->aposx && posy == A->aposy)
     {
         cout << "yes" << endl;
+        A.~Apple();
+        Apple *A = new Apple();
         return 1;
     }
     else
@@ -164,10 +167,10 @@ int main()
         else
         {
             Uint32 frame_time_start = SDL_GetTicks();
-            colApple();
             DrawSnake(sdlwin.GetRenderer());
             keys();
             DrawApple(sdlwin.GetRenderer());
+            colApple(sdlwin.GetRenderer());
             Move(keys());
             SDL_RenderPresent(sdlwin.GetRenderer());
             Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;

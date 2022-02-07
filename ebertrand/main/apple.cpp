@@ -7,11 +7,11 @@ using namespace std;
 
 #include "apple.hpp"
 
-Apple::Apple()
+/*void Apple::Apple()
 {
     srand((unsigned)time(NULL));
     randomx = zero + (rand() % SIZE + 1);
     randomy = zero + (rand() % SIZE + 1);
     this->aposy = randomy * SIZEOFSQUARE;
     this->aposx = randomx * SIZEOFSQUARE;
-}
+}*/
