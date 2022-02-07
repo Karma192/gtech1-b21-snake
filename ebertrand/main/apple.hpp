@@ -18,4 +18,5 @@ class Apple{
         int randomx;
         int randomy;
         Apple();
+        ~Apple();
 };

@@ -15,14 +15,14 @@ using namespace std;
 #define RIGHT 2
 #define LEFT -2
 
-Uint32 frame_rate = 16;
-Uint32 frame_time_start = SDL_GetTicks();
-Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
+Uint32 frame_rate = 50;
 
 int posx = 15 * SIZEOFSQUARE;
 int posy = 15 * SIZEOFSQUARE;
 
 int prev_dir = 0;
+
+Apple *A = new Apple();
 
 int DrawSnake(SDL_Renderer *renderer)
 {
@@ -38,12 +38,10 @@ int DrawSnake(SDL_Renderer *renderer)
     SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
     SDL_RenderDrawRect(renderer, &head);
     SDL_RenderFillRect(renderer, &head);
-    SDL_RenderPresent(renderer);
 }
 
 int DrawApple(SDL_Renderer *renderer)
 {
-    Apple *A = new Apple();
     SDL_Rect rect;
     rect.x = A->aposx;
     rect.y = A->aposy;
@@ -53,7 +51,6 @@ int DrawApple(SDL_Renderer *renderer)
     SDL_SetRenderDrawColor(renderer, 138, 3, 3, 255);
     SDL_RenderDrawRect(renderer, &rect);
     SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderPresent(renderer);
 }
 
 int keys(void)
@@ -131,15 +128,16 @@ int colBoard()
         cout << "GAME OVER" << endl;
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(fenetre);
-        SDL_Quit(); // on quitte la SDL
+        SDL_Quit();
+        return 1;
     }
 }
 
 int colApple()
 {
-    Apple *A = new Apple();
     if (posx == A->aposx && posy == A->aposy)
     {
+        cout << "yes" << endl;
         return 1;
     }
     else
@@ -159,12 +157,25 @@ int main()
     int exit = 0;
     while (exit == 0)
     {
-        colBoard();
-        colApple();
-        DrawSnake(sdlwin.GetRenderer());
-        keys();
-        DrawApple(sdlwin.GetRenderer());
-        Move(keys());
+        if (colBoard() == 1)
+        {
+            break;
+        }
+        else
+        {
+            Uint32 frame_time_start = SDL_GetTicks();
+            colApple();
+            DrawSnake(sdlwin.GetRenderer());
+            keys();
+            DrawApple(sdlwin.GetRenderer());
+            Move(keys());
+            SDL_RenderPresent(sdlwin.GetRenderer());
+            Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
+            if (frame_time_interval < frame_rate)
+            {
+                SDL_Delay(frame_rate - frame_time_interval);
+            }
+        }
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
