@@ -22,17 +22,15 @@ private :
 };
 
 
-int list[][][][] = {}
+int listx[] = {};
+int listy[] = {};
 
 
 list[5] 
 
- sizeof(list)
-for (int i =listnbv ; i < 0; i--)
+nbTails = sizeof(listx);
+for (int i = nbTails ; i < 0; i--)
 {
-    listx [i] = list [i-1];
+    listx[i] = listx[i-1];
+    listy[i] = listy[i-1];
 }
-
-
-segment = 5; 
-listx [segment]

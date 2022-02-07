@@ -1,7 +1,7 @@
 #include "snake.hpp"
 
 #define WIDTHGAME 540
-#define HEIGHTWINDOW 600
+#define HEIGHTWINDOW 630
 #define SIZE 30
 #define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
@@ -104,7 +104,7 @@ void Snake::drawHead(SDL_Renderer *renderer) {
     SDL_RenderFillRect(renderer, &head); 
 }
 
-/*void Snake::drawTails(Snake *tails)
+/*void Snake::drawTails(Snake *tails, SDL_Renderer *renderer)
     {
         SDL_Rect tail;
         tail.w = SIZEOFSQUARE;
@@ -118,22 +118,13 @@ void Snake::drawHead(SDL_Renderer *renderer) {
         SDL_RenderPresent(renderer);
     }*/
 
-/*Snake *Snake::initTails(void)
-{
-    Snake *tails... = new Snake();
-
-    tails->posx = posx...;
-    tails->posy = posy...;
-    tails->prev_dir = prev_dir...;
-
-    return tails;
-}*/
-
 /*int Snake::colTail(void)
 {
-    if (posx == ... && posy == ...) {
-        return 1;
+    nbTails = sizeof(listx);
+    for ( int i = nbTails; i < 0; i--) {
+        if (listx[i] == listx[1] && listy[i] == listy[1]) {
+            return 1;
+        }
+        return 0;
     }
-
-    else {return 0;}
 }*/
