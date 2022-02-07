@@ -69,7 +69,7 @@ void Snake::Move(int dir) {
 }
 
 int Snake::colBoard(void) {
-    if (this->posx >= WIDTHGAME || this->posy >= WIDTHGAME || this->posx <= 0 || this->posy <= 0) {
+    if (this->posx >= WIDTHGAME || this->posy >= WIDTHGAME || this->posx < 0 || this->posy < 0) {
         return 1;
     }
     else {return 0;}

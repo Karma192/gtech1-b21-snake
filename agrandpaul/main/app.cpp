@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -13,11 +12,8 @@ using namespace std;
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 600
 #define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
-int frame_delay;
-int frame_rate_ms = 20;
-Uint32 frame_start;
+Uint32 frame_rate = 80;
 
 int main(void)
 {
@@ -39,7 +35,7 @@ int main(void)
     int apple = 0;
     while (exit == 0 && gameOver == 0)
     {
-        frame_start = SDL_GetTicks();
+        Uint32 frame_time_start = SDL_GetTicks();
         sdlwin.map();
         snakeH.drawHead(sdlwin.GetRenderer());
         snakeH.keys();
@@ -50,13 +46,15 @@ int main(void)
         A.colSnake(snakeH.colApple(A.GetPosx(), A.GetPosy()));
         gameOver = snakeH.colBoard();
         exit = sdlwin.redCross();
-        frame_delay = frame_rate_ms - (SDL_GetTicks() - frame_start);
-        if (frame_delay > 0){
-            SDL_Delay(frame_delay);
+        Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
+        if (frame_time_interval < frame_rate)
+        {
+            SDL_Delay(frame_rate - frame_time_interval);
         }
     }
 
-    if (gameOver != 0) {
+    if (gameOver != 0)
+    {
         cout << "Game Over..." << endl;
         cout << "Your score is " << endl;
         cout << score << endl;

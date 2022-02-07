@@ -13,4 +13,5 @@ class Snake{
         int posx;
         int prev_dir;
         Snake();
+        ~Snake();
 };

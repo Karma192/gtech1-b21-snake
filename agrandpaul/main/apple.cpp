@@ -33,8 +33,8 @@ void Apple::colSnake(int ver)
     if (ver == 1)
     {
         srand((unsigned)time(NULL));
-        randomx = zero + (rand() % SIZE + 1);
-        randomy = zero + (rand() % SIZE + 1);
+        randomx = rand() % SIZE;
+        randomy = rand() % SIZE;
         this->aposy = randomy * SIZEOFSQUARE;
         this->aposx = randomx * SIZEOFSQUARE;
     }
