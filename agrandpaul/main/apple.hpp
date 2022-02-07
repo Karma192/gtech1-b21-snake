@@ -12,8 +12,23 @@ using namespace std;
 #define zero 0
 
 class Apple{
-    public:
-        int posy;
-        int posx;
-        Apple();
+    private :
+        int aposy;
+        int aposx;
+        int randomx;
+        int randomy;
+
+    public :
+        Apple()
+        {
+            srand((unsigned)time(NULL));
+            randomx = zero + (rand() % SIZE + 1);
+            randomy = zero + (rand() % SIZE + 1);
+            this->aposy = randomy * SIZEOFSQUARE;
+            this->aposx = randomx * SIZEOFSQUARE;
+        }
+        int GetPosx();
+        int GetPosy();
+        void DrawApple(SDL_Renderer *renderer);
+        void colSnake(int ver);
 };
