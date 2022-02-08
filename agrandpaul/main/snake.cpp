@@ -1,4 +1,5 @@
 #include "snake.hpp"
+using namespace std;
 
 int Snake::keys(void) {
     int tmpdir = this->prev_dir;
@@ -101,8 +102,8 @@ void Snake::drawTails(SDL_Renderer *renderer)
         SDL_Rect tail;
         tail.w = SIZEOFSQUARE;
         tail.h = SIZEOFSQUARE;
-        tail.x = this->listx[i];
-        tail.y = this->listy[i];
+        tail.x = this->listx(i);
+        tail.y = this->listy(i);
 
         SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
         SDL_RenderDrawRect(renderer, &tail);
@@ -111,11 +112,11 @@ void Snake::drawTails(SDL_Renderer *renderer)
     }
 }
 
-/int Snake::colTail(void)
+int Snake::colTail(void)
 {
-    int nbTails = sizeof(listx[]);
+    int nbTails = sizeof(listx());
     for ( int i = nbTails; i < 0; i--) {
-        if (this->listx[i] == this->listx[0] && this->listy[i] == this->listy[0]) {
+        if (this->listx(i) == this->listx(0) && this->listy(i) == this->listy(0)) {
             return 1;
         }
         return 0;
@@ -125,12 +126,12 @@ void Snake::drawTails(SDL_Renderer *renderer)
 
 void Snake::setList(void)
 {
-    this->listx[0] = this->posx;
-    this->listy[0] = this->posy;
-    int nbTails = sizeof(this->listx[]);
+    this->listx(0) = this->posx;
+    this->listy(0) = this->posy;
+    int nbTails = sizeof(this->listx());
     for (int i = nbTails ; i < 0; i--)
     {
-        this->listx[i] = this->listx[i-1];
-        this->listy[i] = this->listy[i-1];
+        this->listx(i) = this->listx(i-1);
+        this->listy(i) = this->listy(i-1);
     }
 }
