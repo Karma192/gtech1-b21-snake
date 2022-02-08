@@ -47,6 +47,32 @@ int MainSDLWindow::Init(const char* name, int width, int height) {
   return EXIT_SUCCESS;
 }
 
+/*void MainSDLWindow::setName(void)
+{
+  const char *titles[] = {" NAKE by Karma and Hazmat", "S AKE by Karma and Hazmat", "SN KE by Karma and Hazmat", "SNA E by Karma and Hazmat", "SNAK  by Karma and Hazmat", "SNAKE  y Karma and Hazmat", "SNAKE b  Karma and Hazmat", "SNAKE by  arma and Hazmat",
+    "SNAKE by K rma and Hazmat", "SNAKE by Ka ma and Hazmat", "SNAKE by Kar a and Hazmat", "SNAKE by Karm  and Hazmat",
+    "SNAKE by Karma  nd Hazmat", "SNAKE by Karma a d Hazmat", "SNAKE by Karma an  Hazmat", "SNAKE by Karma and  azmat",
+    "SNAKE by Karma and H zmat", "SNAKE by Karma and Ha mat", "SNAKE by Karma and Haz at", "SNAKE by Karma and Hazm t", "SNAKE by Karma and Hazma "
+  }; 
+
+  int i = 0;
+  int exit = 0;
+  while (exit = 0)
+  {
+    SDL_SetWindowTitle(this->window, titles[i]);
+    i++;
+    exit = this->redCross();
+  }
+}*/
+
+/*void MainSDLWindow::runTHSetName(void)
+{
+
+  std::thread t1(&MainSDLWindow::setName, sdlwin);
+
+  t1.join();
+}*/
+
 int MainSDLWindow::redCross(void)
 {
   SDL_Event event;
@@ -76,7 +102,7 @@ int MainSDLWindow::map(void)
   
   if(!monImage)
   {
-    printf("Erreur de chargement de l'image : %s",SDL_GetError());
+    printf("Erreur de chargement de monImage : %s",SDL_GetError());
     return -1;
   }
   

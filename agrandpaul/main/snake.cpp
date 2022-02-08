@@ -1,15 +1,5 @@
 #include "snake.hpp"
 
-#define WIDTHGAME 540
-#define HEIGHTWINDOW 600
-#define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
-
-#define UP 1
-#define DOWN -1
-#define RIGHT 2
-#define LEFT -2
-
 int Snake::keys(void) {
     int tmpdir = this->prev_dir;
     const Uint8 *keystate = SDL_GetKeyboardState(NULL);
@@ -99,41 +89,48 @@ void Snake::drawHead(SDL_Renderer *renderer) {
     head.x = this->posx;
     head.y = this->posy;
 
-    SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
+    SDL_SetRenderDrawColor(renderer, 11, 60, 42, 255);
     SDL_RenderDrawRect(renderer, &head);
     SDL_RenderFillRect(renderer, &head); 
 }
 
-/*void Snake::drawTails(Snake *tails)
-    {
+void Snake::drawTails(SDL_Renderer *renderer)
+{
+    int nbTails = sizeof(this->listx());
+    for (int i = nbTails; i < 0; i--) {
         SDL_Rect tail;
         tail.w = SIZEOFSQUARE;
         tail.h = SIZEOFSQUARE;
-        tail.x = tails->posx;
-        tail.y = tails->posy;
+        tail.x = this->listx[i];
+        tail.y = this->listy[i];
 
         SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
         SDL_RenderDrawRect(renderer, &tail);
         SDL_RenderFillRect(renderer, &tail); 
         SDL_RenderPresent(renderer);
-    }*/
-
-/*Snake *Snake::initTails(void)
-{
-    Snake *tails... = new Snake();
-
-    tails->posx = posx...;
-    tails->posy = posy...;
-    tails->prev_dir = prev_dir...;
-
-    return tails;
-}*/
-
-/*int Snake::colTail(void)
-{
-    if (posx == ... && posy == ...) {
-        return 1;
     }
+}
 
-    else {return 0;}
-}*/
+/int Snake::colTail(void)
+{
+    int nbTails = sizeof(listx[]);
+    for ( int i = nbTails; i < 0; i--) {
+        if (this->listx[i] == this->listx[0] && this->listy[i] == this->listy[0]) {
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
+
+void Snake::setList(void)
+{
+    this->listx[0] = this->posx;
+    this->listy[0] = this->posy;
+    int nbTails = sizeof(this->listx[]);
+    for (int i = nbTails ; i < 0; i--)
+    {
+        this->listx[i] = this->listx[i-1];
+        this->listy[i] = this->listy[i-1];
+    }
+}
