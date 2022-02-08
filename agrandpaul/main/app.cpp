@@ -21,8 +21,8 @@ int main(void)
     Snake snakeH;
     Apple A;
     Score sc;
-    MainSDLWindow sdlwin;
-    if (sdlwin.Init("Snake", WIDTHGAME, HEIGHTWINDOW) == EXIT_FAILURE)
+    MainSDLWindow *sdlwin = new MainSDLWindow;
+    if (sdlwin->Init("Snake", WIDTHGAME, HEIGHTWINDOW) == EXIT_FAILURE)
     {
         exit(EXIT_FAILURE);
     }
@@ -30,21 +30,20 @@ int main(void)
     int gameOver = 0;
     int score = 0;
     int apple = 0;
-    sdlwin.runTHSetName();
     while (exit == 0 && gameOver == 0)
     {
         Uint32 frame_time_start = SDL_GetTicks();
-        sdlwin.map();
-        snakeH.drawHead(sdlwin.GetRenderer());
+        sdlwin->map();
+        snakeH.drawHead(sdlwin->GetRenderer());
         snakeH.keys();
-        A.DrawApple(sdlwin.GetRenderer());
+        A.DrawApple(sdlwin->GetRenderer());
         snakeH.Move(snakeH.keys());
-        SDL_RenderPresent(sdlwin.GetRenderer());
+        SDL_RenderPresent(sdlwin->GetRenderer());
         score = score + snakeH.colApple(A.GetPosx(), A.GetPosy());
-        sc.drawScore(sdlwin.GetRenderer(), score);
+        sc.drawScore(sdlwin->GetRenderer(), score);
         A.colSnake(snakeH.colApple(A.GetPosx(), A.GetPosy()));
         gameOver = snakeH.colBoard();
-        exit = sdlwin.redCross();
+        exit = sdlwin->redCross();
         Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
         if (frame_time_interval < frame_rate)
         {
