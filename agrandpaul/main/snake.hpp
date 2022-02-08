@@ -1,5 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <list>
+using namespace std;
 
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 630
@@ -28,6 +30,6 @@ private :
     int posx = 0;
     int posy = 0;
     int prev_dir = 0;
-    listx();
-    listy();
+    list<int> listx();
+    list<int> listy();
 };
