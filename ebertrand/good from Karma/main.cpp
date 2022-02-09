@@ -20,7 +20,7 @@ int main(void)
     Snake snakeH;
     Apple A;
     Score sc;
-    int score = 0;
+    int score = 27;
     MainSDLWindow sdlwin;
     if (sdlwin.Init("Snake", score, WIDTHGAME, HEIGHTWINDOW) == EXIT_FAILURE)
     {

@@ -1,9 +1,4 @@
 #include "score.hpp"
-using namespace std;
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 
 void Score::drawScore(SDL_Renderer *renderer, int score)
 {
