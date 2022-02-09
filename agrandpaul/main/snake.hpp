@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <vector>
+#include <list>
 #include <iostream>
 using namespace std;
 
@@ -14,8 +14,8 @@ using namespace std;
 #define RIGHT 2
 #define LEFT -2
 
-extern int listx[1];
-extern int listy[1];
+extern list<int> listx;
+extern list<int> listy;
 
 class Snake {
 public :

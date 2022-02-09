@@ -1,8 +1,8 @@
 #include "snake.hpp"
 using namespace std;
 
-int listx[];
-int listy[];
+list<int> listx = {0};
+list<int> listy = {0};
 
 int Snake::keys(void) {
     int tmpdir = this->prev_dir;
@@ -70,7 +70,11 @@ int Snake::colDeath(void) {
 
     int nbTails = sizeof(listx);
     for ( int i = nbTails; i != 0; i--) {
-        if (listx[i] == listx[0] && listy[i] == listy[0]) {
+        auto l_Actx = listx.begin();
+        auto l_Acty = listy.begin();
+        advance(l_Actx, i);
+        advance(l_Acty, i);
+        if (*l_Actx == *listx.begin() && *l_Acty == *listy.begin()) {
             return 1;
         }
         return 0;
@@ -110,22 +114,24 @@ void Snake::drawHead(SDL_Renderer *renderer) {
 void Snake::initTails(int ver)
 {
     if (ver != 0) {
-        int nbTails = sizeof(listx);
-        listx.push_back(nbTails+1);
-        listy.push_back(nbTails+1);
-        cout << listx[nbTails] << " | " << listy[nbTails] << endl;
+        listx.push_back(this->posx);
+        listy.push_back(this->posy);
     }
 }
 
 void Snake::drawTails(SDL_Renderer *renderer)
 {
-    int nbTails = sizeof(listx);
+    int nbTails = listx.size();
     for (int i = nbTails; i < 0; i--) {
+        auto l_Actx = listx.begin();
+        auto l_Acty = listy.begin();
+        advance(l_Actx, i);
+        advance(l_Acty, i);
         SDL_Rect tail;
         tail.w = SIZEOFSQUARE;
         tail.h = SIZEOFSQUARE;
-        tail.x = listx[i];
-        tail.y = listy[i];
+        tail.x = *l_Actx;
+        tail.y = *l_Acty;
 
         SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
         SDL_RenderDrawRect(renderer, &tail);
@@ -136,24 +142,36 @@ void Snake::drawTails(SDL_Renderer *renderer)
 
 void Snake::setList(void)
 {
-    listx[0] = this->posx;
-    listy[0] = this->posy;
-    int nbTails = sizeof(listx);
+    *listx.begin() = this->posx;
+    *listy.begin() = this->posy;
+    int nbTails = listx.size();
     for (int i = nbTails ; i != 0; i--)
     {
-        listx[i] = listx[i-1];
-        listy[i] = listy[i-1];
+        auto l_Actx = listx.begin();
+        auto l_Prevx = listx.begin();
+        auto l_Acty = listy.begin();
+        auto l_Prevy = listy.begin();
+        advance(l_Actx, i);
+        advance(l_Prevx, i-1);
+        advance(l_Acty, i);
+        advance(l_Prevy, i-1);
+        *l_Actx = *l_Prevx;
+        *l_Acty = *l_Prevy;
     }
 }
 
 void Snake::error(void)
 {
-    int nbTails = sizeof(listx);
+    int nbTails = listx.size();
     cout << nbTails << endl;
     for (int i = nbTails ; i >= 0; i--)
     {
-        cout << "x : " << listx[0] << " y : " << listy[0] << endl;
-        cout << "x : " << listx[i] << " y : " << listy[i] << endl;
+        auto l_Actx = listx.begin();
+        auto l_Acty = listy.begin();
+        advance(l_Actx, i);
+        advance(l_Acty, i);
+        cout << "x : " << *listx.begin() << " y : " << *listy.begin() << endl;
+        cout << "x : " << *l_Actx << " y : " << *l_Acty << endl;
     }
     cout << "." << endl;
 }
