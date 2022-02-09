@@ -1,6 +1,9 @@
 #include "snake.hpp"
 using namespace std;
 
+int listx[] = {};
+int listy[] = {};
+
 int Snake::keys(void) {
     int tmpdir = this->prev_dir;
     const Uint8 *keystate = SDL_GetKeyboardState(NULL);
@@ -59,11 +62,20 @@ void Snake::Move(int dir) {
     }
 }
 
-int Snake::colBoard(void) {
+int Snake::colDeath(void) {
     if (this->posx >= WIDTHGAME || this->posy >= WIDTHGAME || this->posx < 0 || this->posy < 0) {
         return 1;
     }
     else {return 0;}
+
+    int nbTails = sizeof(listx);
+    for ( int i = nbTails; i != 0; i--) {
+        if (listx[i] == listx[0] && listy[i] == listy[0]) {
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
 }
 
 int Snake::colApple(int aPosx, int aPosy) {
@@ -95,15 +107,25 @@ void Snake::drawHead(SDL_Renderer *renderer) {
     SDL_RenderFillRect(renderer, &head); 
 }
 
+void Snake::initTails(int ver)
+{
+    if (ver != 0) {
+        int nbTails = sizeof(listx);
+        listx[nbTails +1] = listx[nbTails];
+        listy[nbTails +1] = listy[nbTails];
+        cout << listx[nbTails] << " | " << listy[nbTails] << endl;
+    }
+}
+
 void Snake::drawTails(SDL_Renderer *renderer)
 {
-    int nbTails = sizeof(this->listx());
+    int nbTails = sizeof(listx);
     for (int i = nbTails; i < 0; i--) {
         SDL_Rect tail;
         tail.w = SIZEOFSQUARE;
         tail.h = SIZEOFSQUARE;
-        tail.x = this->listx(i);
-        tail.y = this->listy(i);
+        tail.x = listx[i];
+        tail.y = listy[i];
 
         SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
         SDL_RenderDrawRect(renderer, &tail);
@@ -112,26 +134,24 @@ void Snake::drawTails(SDL_Renderer *renderer)
     }
 }
 
-int Snake::colTail(void)
-{
-    int nbTails = sizeof(listx());
-    for ( int i = nbTails; i < 0; i--) {
-        if (this->listx(i) == this->listx(0) && this->listy(i) == this->listy(0)) {
-            return 1;
-        }
-        return 0;
-    }
-    return 0;
-}
-
 void Snake::setList(void)
 {
-    this->listx(0) = this->posx;
-    this->listy(0) = this->posy;
-    int nbTails = sizeof(this->listx());
-    for (int i = nbTails ; i < 0; i--)
+    listx[0] = this->posx;
+    listy[0] = this->posy;
+    int nbTails = sizeof(listx);
+    for (int i = nbTails ; i != 0; i--)
     {
-        this->listx(i) = this->listx(i-1);
-        this->listy(i) = this->listy(i-1);
+        listx[i] = listx[i-1];
+        listy[i] = listy[i-1];
     }
+}
+
+void Snake::error(void)
+{
+    int nbTails = sizeof(listx);
+    for (int i = nbTails ; i >= 0; i--)
+    {
+        cout << "x : " << listx[i] << " y : " << listy[i] << endl;
+    }
+    cout << "." << endl;
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <list>
+#include <iostream>
 using namespace std;
 
 #define WIDTHGAME 540
@@ -13,23 +13,26 @@ using namespace std;
 #define RIGHT 2
 #define LEFT -2
 
+extern int listx[];
+extern int listy[];
+
 class Snake {
 public :
     int keys(void);
     void Move(int dir);
-    int colBoard(void);
+    int colDeath(void);
     int colApple(int aPosx, int aPosy);
     void drawHead(SDL_Renderer *renderer);
     Snake(void);
     ~Snake(void);
+    void initTails(int score);
     void drawTails(SDL_Renderer *renderer);
-    int colTail(void);
     void setList(void);
+    void error(void);
 
 private :
     int posx = 0;
     int posy = 0;
     int prev_dir = 0;
-    list<int> listx();
-    list<int> listy();
+    int prev_score = 0;
 };
