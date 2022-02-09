@@ -5,7 +5,8 @@ Etienne BERTRAND & Andry GRANDPAUL
 Hello !!
 Welcome to our beautiful Snake game !
 
-To play it you just have to type "make snake" and then "./snake" to run it !
+First you need to go to the folder name "main".
+Then to play it you just have to type "make run" !
 
 Great !
 Now you can play our beautiful game !
