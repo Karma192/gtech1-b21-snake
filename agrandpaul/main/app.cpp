@@ -13,6 +13,7 @@ using namespace std;
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 630
 #define SIZE 30
+#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
 Uint32 frame_rate = 80;
 
@@ -36,13 +37,17 @@ int main(void)
         sdlwin->map();
         snakeH.drawHead(sdlwin->GetRenderer());
         snakeH.keys();
+        snakeH.drawTails(sdlwin->GetRenderer());
         A.DrawApple(sdlwin->GetRenderer());
         snakeH.Move(snakeH.keys());
         SDL_RenderPresent(sdlwin->GetRenderer());
         score = score + snakeH.colApple(A.GetPosx(), A.GetPosy());
         sc.drawScore(sdlwin->GetRenderer(), score);
+        snakeH.setList();
+        snakeH.initTails(snakeH.colApple(A.GetPosx(), A.GetPosy()));
+        snakeH.error();
         A.colSnake(snakeH.colApple(A.GetPosx(), A.GetPosy()));
-        gameOver = snakeH.colBoard();
+        gameOver = snakeH.colDeath();
         exit = sdlwin->redCross();
         Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
         if (frame_time_interval < frame_rate)
@@ -53,7 +58,6 @@ int main(void)
 
     if (gameOver != 0)
     {
-        SDL_Delay(1000);
         cout << "Game Over..." << endl;
         cout << "Your score is " << endl;
         cout << score << endl;
