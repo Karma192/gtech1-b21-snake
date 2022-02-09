@@ -6,7 +6,7 @@ using namespace std;
 
 #include "apple.hpp"
 #include "snake.hpp"
-//#include "score.hpp"
+#include "score.hpp"
 #include "MainSDLWindow.hpp"
 
 #define WIDTHGAME 540
