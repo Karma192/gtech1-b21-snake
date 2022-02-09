@@ -15,7 +15,7 @@ SDL_Renderer *MainSDLWindow::GetRenderer() {
   return this->renderer;
 }
 
-int MainSDLWindow::Init(const char* name, int width, int height) {
+int MainSDLWindow::Init(const char* name, int score, int width, int height) {
   // Init SDL:
   if(SDL_Init(SDL_INIT_VIDEO) < 0) {
     SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s", SDL_GetError());

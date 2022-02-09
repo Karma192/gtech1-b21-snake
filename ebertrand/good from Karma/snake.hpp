@@ -10,6 +10,7 @@ public :
     void drawHead(SDL_Renderer *renderer);
     Snake(void);
     ~Snake(void);
+    void drawTails(SDL_Renderer *renderer);
     //void draxTails(Snake *tails);
     //Snake *initTails(void);
     //int colTail(void);
@@ -18,4 +19,6 @@ private :
     int posx = 0;
     int posy = 0;
     int prev_dir = 0;
+    int listx[];
+    int listy[];
 };

@@ -104,6 +104,23 @@ void Snake::drawHead(SDL_Renderer *renderer) {
     SDL_RenderFillRect(renderer, &head); 
 }
 
+/*void Snake::drawTails(SDL_Renderer *renderer)
+{
+    int nbTails = sizeof(listx);
+    for (int i = nbTails; i < 0; i--) {
+        SDL_Rect tail;
+        tail.w = SIZEOFSQUARE;
+        tail.h = SIZEOFSQUARE;
+        tail.x = listx[i];
+        tail.y = listy[i];
+
+        SDL_SetRenderDrawColor(renderer, 1, 50, 32, 255);
+        SDL_RenderDrawRect(renderer, &tail);
+        SDL_RenderFillRect(renderer, &tail); 
+        SDL_RenderPresent(renderer);
+    }
+}
+
 /*void Snake::drawTails(Snake *tails)
     {
         SDL_Rect tail;

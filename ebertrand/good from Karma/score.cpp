@@ -1,61 +1,41 @@
 #include "score.hpp"
+using namespace std;
+#include <SDL2/SDL.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
 
-Score::Score(void){
-    extern DECLSPEC int SDLCALL TTF_Init(void);
-    #define TTF_GetError SDL_GetError
+void Score::drawScore(SDL_Renderer *renderer, int score)
+{
+  int x = this->sposx;
+  int y = this->sposy;
+  x = x + (i * SIZEOFSQUARE);
+  for (int i = score; i != 0; i--)
+  {
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
+    rect.w = SIZEOFSQUARE;
+    rect.h = SIZEOFSQUARE;
 
-    if (TTF_Init() < 0)
+    SDL_SetRenderDrawColor(renderer, this->Red, this->Green, this->Blue, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);
+
+    if (score < 30)
     {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] > %s", TTF_GetError());
-        return EXIT_FAILURE;
+      x = x + SIZEOFSQUARE;
+      this->Red = 9;
+      this->Green = 40;
+      this->Blue = 116;
     }
 
-    this->renderer2 = NULL;
-    this->window2 = NULL;
-}
-
-Score::~Score(void){
-    void SDLCALL TTF_Quit(void);
-    // Libération des ressource en mémoire
-    SDL_DestroyRenderer(renderer2);
-    SDL_DestroyWindow(window2);
-    TTF_Quit();
-    SDL_Quit();
-}
-
-int Score::Init(const char* name, int width, int height) {
-  // Init SDL:
-  if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s", SDL_GetError());
-    return EXIT_FAILURE;
+    else
+    {
+      this->Red += 10;
+      this->Green += 10;
+      this->Blue += 10;
+      x = x + SIZEOFSQUARE;
+    }
   }
-
-  // Init the main SDL window:
-  Uint32 window_flags = 0;
-  this->window2 = SDL_CreateWindow(name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                  width, height,
-                                  window_flags);
-  if(this->window2 == NULL) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s", SDL_GetError());
-    return EXIT_FAILURE;
-  }
-
-  // Init renderer within the main SDL window:
-  Uint32 renderer_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-  this->renderer2 = SDL_CreateRenderer(window, -1, renderer_flags);
-  if(this->renderer2 == NULL) {
-    printf("SDL2 error while creating renderer : %s", SDL_GetError());
-    return EXIT_FAILURE;
-  }
-
-  // Fill renderer background:
-  SDL_SetRenderDrawColor(this->renderer2, 0, 0, 0, 255);
-  SDL_RenderClear(this->renderer2);
-  SDL_RenderPresent(this->renderer2);
-  return EXIT_SUCCESS;
-}
-
-void Score::showScore(char score) {
-    
-    
 }
