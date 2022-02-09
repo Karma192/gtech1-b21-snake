@@ -13,7 +13,7 @@ using namespace std;
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 630
 #define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
+#define SIZEOFSQUARE floor(WIDTHGAME / SIZE)
 
 Uint32 frame_rate = 80;
 
@@ -33,7 +33,7 @@ int main(void)
     int apple = 0;
     while (exit == 0 && gameOver == 0)
     {
-            
+        Uint32 frame_time_start = SDL_GetTicks();
         sdlwin->map();
         snakeH.drawHead(sdlwin->GetRenderer());
         snakeH.keys();
