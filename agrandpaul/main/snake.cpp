@@ -1,6 +1,9 @@
 #include "snake.hpp"
 using namespace std;
 
+int listx[];
+int listy[];
+
 int Snake::keys(void) {
     int tmpdir = this->prev_dir;
     const Uint8 *keystate = SDL_GetKeyboardState(NULL);
@@ -109,7 +112,7 @@ void Snake::initTails(int ver)
     if (ver != 0) {
         int nbTails = sizeof(listx);
         listx.push_back(nbTails+1);
-        listy.push_back(nbTails+1) = listy[nbTails];
+        listy.push_back(nbTails+1);
         cout << listx[nbTails] << " | " << listy[nbTails] << endl;
     }
 }

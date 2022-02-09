@@ -14,8 +14,8 @@ using namespace std;
 #define RIGHT 2
 #define LEFT -2
 
-vector<int> listx(1);
-vector<int> listy(1);
+extern int listx[1];
+extern int listy[1];
 
 class Snake {
 public :
