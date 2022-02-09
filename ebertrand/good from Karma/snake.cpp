@@ -132,11 +132,11 @@ void Snake::initTails(int ver)
 {
     if (ver != 0)
     {
-        int nbTails = sizeof(listx);
-        listx[nbTails + 1] = listx[nbTails];
-        listy[nbTails + 1] = listy[nbTails];
-        cout << listx[nbTails] << " | " << listy[nbTails] << endl;
-    }
+        listx.push_back(5);
+        cout << listx.size() << endl;
+
+        cout << sizeof(listx) << endl;
+    }   
 }
 
 void Snake::drawTails(SDL_Renderer *renderer)
