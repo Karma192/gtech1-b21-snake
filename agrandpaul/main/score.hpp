@@ -7,17 +7,18 @@
 #define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
 class Score {
-    public :
-        Score();
-        ~Score();
+    public:
         void drawScore(SDL_Renderer *renderer, int score);
+        int i = 0;
 
-    private :
-        int Red = 11;
-        int Green = 143;
-        int Blue = 46;
+    private:
+        int Red;
+        int Green;
+        int Blue;
         int verY = 0;
         int verShow = 0;
         int sposx = 0;
-        int sposy = 32 *SIZEOFSQUARE;
+        int sposy = 31 * SIZEOFSQUARE;
+        int x;
+        int y;
 };

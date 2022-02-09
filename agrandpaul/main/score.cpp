@@ -1,23 +1,15 @@
 #include "score.hpp"
-
-Score::Score()
-{
-
-}
-
-Score::~Score()
-{
-
-}
+using namespace std;
+#include <SDL2/SDL.h>
+#include <iostream>
 
 void Score::drawScore(SDL_Renderer *renderer, int score)
 {
   int x = this->sposx;
   int y = this->sposy;
-  for (int i = score+1; i<0; i--) 
+  x = x + (i * SIZEOFSQUARE);
+  for (int i = score; i != 0; i--)
   {
-    x = x + (i *SIZEOFSQUARE);
-    
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
@@ -28,14 +20,20 @@ void Score::drawScore(SDL_Renderer *renderer, int score)
     SDL_RenderDrawRect(renderer, &rect);
     SDL_RenderFillRect(renderer, &rect);
 
-    if (score%SIZESHOWSCORE == 0) {
-      x = this->sposx;
-      y = this->sposy;
+    if (score < 30)
+    {
+      x = x + SIZEOFSQUARE;
+      this->Red = 9;
+      this->Green = 40;
+      this->Blue = 116;
     }
 
-    if (i%SIZE == 0) {
-      x = this->sposx;
-      y = y +SIZEOFSQUARE;
+    else
+    {
+      this->Red += 10;
+      this->Green += 10;
+      this->Blue += 10;
+      x = x + SIZEOFSQUARE;
     }
   }
 }

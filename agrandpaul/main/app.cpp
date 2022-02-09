@@ -33,7 +33,7 @@ int main(void)
     int apple = 0;
     while (exit == 0 && gameOver == 0)
     {
-            
+        Uint32 frame_time_start = SDL_GetTicks();
         sdlwin->map();
         snakeH.drawHead(sdlwin->GetRenderer());
         snakeH.keys();
