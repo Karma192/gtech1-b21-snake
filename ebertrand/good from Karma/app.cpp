@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <thread>
 using namespace std;
 
 #include "apple.hpp"
@@ -11,9 +10,8 @@ using namespace std;
 #include "MainSDLWindow.hpp"
 
 #define WIDTHGAME 540
-#define HEIGHTWINDOW 630
+#define HEIGHTWINDOW 600
 #define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
 
 Uint32 frame_rate = 80;
 
@@ -22,33 +20,29 @@ int main(void)
     Snake snakeH;
     Apple A;
     Score sc;
-    MainSDLWindow *sdlwin = new MainSDLWindow;
-    if (sdlwin->Init("Snake", WIDTHGAME, HEIGHTWINDOW) == EXIT_FAILURE)
+    int score = 0;
+    MainSDLWindow sdlwin;
+    if (sdlwin.Init("Snake", score, WIDTHGAME, HEIGHTWINDOW) == EXIT_FAILURE)
     {
         exit(EXIT_FAILURE);
     }
     int exit = 0;
     int gameOver = 0;
-    int score = 0;
     int apple = 0;
     while (exit == 0 && gameOver == 0)
     {
-            
-        sdlwin->map();
-        snakeH.drawHead(sdlwin->GetRenderer());
+        Uint32 frame_time_start = SDL_GetTicks();
+        sdlwin.map();
+        snakeH.drawHead(sdlwin.GetRenderer());
         snakeH.keys();
-        snakeH.drawTails(sdlwin->GetRenderer());
-        A.DrawApple(sdlwin->GetRenderer());
+        A.DrawApple(sdlwin.GetRenderer());
         snakeH.Move(snakeH.keys());
-        SDL_RenderPresent(sdlwin->GetRenderer());
+        SDL_RenderPresent(sdlwin.GetRenderer());
         score = score + snakeH.colApple(A.GetPosx(), A.GetPosy());
-        sc.drawScore(sdlwin->GetRenderer(), score);
-        snakeH.setList();
-        snakeH.initTails(snakeH.colApple(A.GetPosx(), A.GetPosy()));
-        snakeH.error();
+        sc.drawScore(sdlwin.GetRenderer(), score);
         A.colSnake(snakeH.colApple(A.GetPosx(), A.GetPosy()));
-        gameOver = snakeH.colDeath();
-        exit = sdlwin->redCross();
+        gameOver = snakeH.colBoard();
+        exit = sdlwin.redCross();
         Uint32 frame_time_interval = SDL_GetTicks() - frame_time_start;
         if (frame_time_interval < frame_rate)
         {
