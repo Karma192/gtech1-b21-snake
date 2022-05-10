@@ -13,7 +13,7 @@ using namespace std;
 #define WIDTHGAME 540
 #define HEIGHTWINDOW 630
 #define SIZE 30
-#define SIZEOFSQUARE floor(WIDTHGAME /SIZE)
+#define SIZEOFSQUARE floor(WIDTHGAME / SIZE)
 
 Uint32 frame_rate = 80;
 

@@ -1,0 +1,90 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Apple {
+	+Apple()
+	+GetPosx() : int
+	+GetPosy() : int
+	-aposx : int
+	-aposy : int
+	-randomx : int
+	-randomy : int
+	+DrawApple(SDL_Renderer* renderer) : void
+	+colSnake(int ver) : void
+}
+
+
+class MainSDLWindow {
+	+MainSDLWindow()
+	+~MainSDLWindow()
+	+GetRenderer() : SDL_Renderer*
+	-renderer : SDL_Renderer*
+	-mapSnake : SDL_Surface*
+	-window : SDL_Window*
+	+Init(const char* winname, int width_, int height_) : int
+	+map() : int
+	+redCross() : int
+	+runTHSetName() : void
+	+setName() : void
+}
+
+
+class Score {
+	-Blue : int
+	-Green : int
+	-Red : int
+	+i : int
+	-sposx : int
+	-sposy : int
+	-verShow : int
+	-verY : int
+	-x : int
+	-y : int
+	+drawScore(SDL_Renderer* renderer, int score) : void
+}
+
+
+class Snake {
+	+Snake()
+	+~Snake()
+	+colApple(int aPosx, int aPosy) : int
+	+colDeath() : int
+	+keys() : int
+	-posx : int
+	-posy : int
+	-prev_dir : int
+	-prev_score : int
+	+Move(int dir) : void
+	+drawHead(SDL_Renderer* renderer) : void
+	+drawTails(SDL_Renderer* renderer) : void
+	+error() : void
+	+initTails(int score) : void
+	+setList() : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
+
